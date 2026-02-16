@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dependency_injection_packages.dart';
 
-class DInjector {
+class DependencyInjector {
   static late final SharedPreferences _sharedPreferences;
 
   static Future<void> initDB() async {

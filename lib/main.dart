@@ -21,7 +21,7 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  await DInjector.initDB();
+  await DependencyInjector.initDB();
   runApp(const TemplateProject());
 }
 
@@ -37,9 +37,9 @@ class TemplateProject extends StatelessWidget {
       useInheritedMediaQuery: true,
       builder: (BuildContext context, child) {
         return MultiRepositoryProvider(
-          providers: DInjector.repositoryProvider,
+          providers: DependencyInjector.repositoryProvider,
           child: MultiBlocProvider(
-            providers: DInjector.blocProviders,
+            providers: DependencyInjector.blocProviders,
             child: MaterialApp(
               navigatorKey: NavigationService.navigatorKey,
               debugShowCheckedModeBanner: false,
