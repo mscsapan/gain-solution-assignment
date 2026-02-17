@@ -7,4 +7,10 @@ class KString {
   static const String cacheUserResponse = 'cacheUserResponse';
   static const String getExistingUserResponseKey = 'exitingUserResponse';
   static const String cachedWebSettingKey = 'cachedWebSettingKey';
+
+
+
+  static const String ticketPath = 'assets/data/tickets.json';
+  static const String filterPath = 'assets/data/filters.json';
+  static const String contactPath = 'assets/data/contacts.json';
 }

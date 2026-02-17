@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+import '../../presentation/utils/k_string.dart';
 import '../models/auth/login_model.dart';
 import 'network_parser.dart';
 import 'remote_url.dart';
@@ -10,6 +14,8 @@ abstract class RemoteDataSource {
   Future logout(String token);
 
   Future getSetting();
+
+  Future fetchTickets();
 }
 
 typedef CallClientMethod = Future<http.Response> Function();
@@ -55,6 +61,15 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     final responseJsonBody =
         await NetworkParser.callClientWithCatchException(() => clientMethod);
     return responseJsonBody;
+  }
+
+  @override
+  Future fetchTickets() async {
+    final data = await rootBundle.loadString(KString.ticketPath);
+
+    final decoded = json.decode(data); //convert String → dynamic
+
+    return decoded as List<dynamic>;
   }
 
 // @override

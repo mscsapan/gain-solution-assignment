@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/ticket/ticket_screen.dart';
 import 'route_packages_name.dart';
 
 class RouteNames {
@@ -26,6 +27,9 @@ class RouteNames {
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String providerProfileScreen = '/updateShopScreen';
   static const String reviewScreen = '/reviewScreen';
+
+
+  static const String ticketScreen = '/ticketScreen';
 
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -60,6 +64,10 @@ class RouteNames {
       case RouteNames.mainScreen:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const MainScreen());
+
+        case RouteNames.ticketScreen:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const TicketScreen());
 
       // case RouteNames.profileScreen:
       //   return MaterialPageRoute(

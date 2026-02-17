@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:gain_solution_task/presentation/cubit/ticket/ticket_cubit.dart';
 
 class TicketItemModel extends Equatable {
   final String id;
@@ -14,6 +15,7 @@ class TicketItemModel extends Equatable {
   final String status;
   final List<String?>? tags;
   final String createdAt;
+  final TicketState ticketState;
   const TicketItemModel({
     required this.id,
     required this.subject,
@@ -25,6 +27,7 @@ class TicketItemModel extends Equatable {
     required this.status,
     required this.tags,
     required this.createdAt,
+    this.ticketState =  const TicketInitial(),
   });
 
   TicketItemModel copyWith({
@@ -38,6 +41,7 @@ class TicketItemModel extends Equatable {
     String? status,
     List<String?>? tags,
     String? createdAt,
+    TicketState? ticketState,
   }) {
     return TicketItemModel(
       id: id ?? this.id,
@@ -50,6 +54,7 @@ class TicketItemModel extends Equatable {
       status: status ?? this.status,
       tags: tags ?? this.tags,
       createdAt: createdAt ?? this.createdAt,
+      ticketState: ticketState ?? this.ticketState,
     );
   }
 
@@ -90,6 +95,22 @@ class TicketItemModel extends Equatable {
   @override
   bool get stringify => true;
 
+  static TicketItemModel init(){
+    return TicketItemModel(
+      id : '',
+      subject : '',
+      description : '',
+      customer : '',
+      email : '',
+      brand : '',
+      priority : '',
+      status : '',
+      tags : const [],
+      createdAt : '',
+      ticketState :  const TicketInitial(),
+    );
+  }
+
   @override
   List<Object?> get props {
     return [
@@ -103,6 +124,7 @@ class TicketItemModel extends Equatable {
       status,
       tags,
       createdAt,
+      ticketState,
     ];
   }
 }

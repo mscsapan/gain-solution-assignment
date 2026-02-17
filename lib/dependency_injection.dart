@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/cubit/ticket/ticket_cubit.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data/repositories/ticket_repository_impl.dart';
 import 'dependency_injection_packages.dart';
+import 'domain/repositories/ticket_repository.dart';
+import 'domain/usecases/ticket/ticket_usecases.dart';
 
 class DependencyInjector {
   static late final SharedPreferences _sharedPreferences;
@@ -47,12 +51,22 @@ class DependencyInjector {
       ),
     ),
 
+    RepositoryProvider<TicketRepository>(
+      create: (context) => TicketRepositoryImpl(
+        remoteDataSources: context.read(),
+      ),
+    ),
+
     // Combined Auth Use Cases
     RepositoryProvider<AuthUseCases>(
       create: (context) => AuthUseCases.create(context.read<AuthRepository>()),
     ),
     RepositoryProvider<GetSettingUseCase>(
       create: (context) => GetSettingUseCase(context.read<SettingRepository>()),
+    ),
+
+    RepositoryProvider<TicketUseCases>(
+      create: (context) => TicketUseCases.create(context.read<TicketRepository>()),
     ),
   ];
 
@@ -68,6 +82,12 @@ class DependencyInjector {
     BlocProvider<SettingCubit>(
       create: (BuildContext context) => SettingCubit(
         getSettingUseCase: context.read<GetSettingUseCase>(),
+      ),
+    ),
+
+    BlocProvider<TicketCubit>(
+      create: (BuildContext context) => TicketCubit(
+        useCase: context.read<TicketUseCases>(),
       ),
     ),
   ];
