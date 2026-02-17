@@ -34,38 +34,19 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isRoboto) {
-      return Padding(
-        padding: Utils.only(bottom: 2.0),
-        child: Text(
-          text,
-          textAlign: textAlign,
-          overflow: overflow,
-          maxLines: maxLine,
-          style: GoogleFonts.roboto(
-            fontWeight: fontWeight,
-            fontSize: fontSize.sp,
-            color: color,
-            height: height.h,
-            decoration: decoration,
-          ),
-        ),
-      );
-    } else {
-      return Text(
-        text,
-        textAlign: textAlign,
-        overflow: overflow,
-        maxLines: maxLine,
-        style: TextStyle(
-          fontWeight: fontWeight,
-          fontSize: fontSize.sp,
-          color: color,
-          fontFamily: fontFamily,
-          height: height.h,
-          decoration: decoration,
-        ),
-      );
-    }
+    return Text(
+      text,
+      textAlign: textAlign,
+      overflow: overflow,
+      maxLines: maxLine,
+      style: GoogleFonts.montserrat(
+        fontWeight: fontWeight,
+        fontSize: fontSize.sp,
+        color: color,
+        height: height.h,
+        decoration: decoration,
+        letterSpacing: 0.0,
+      ),
+    );
   }
 }

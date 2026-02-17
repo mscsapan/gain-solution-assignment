@@ -15,7 +15,7 @@ abstract class RemoteDataSource {
 
   Future getSetting();
 
-  Future fetchTickets();
+  Future fetchTickets(String path);
 }
 
 typedef CallClientMethod = Future<http.Response> Function();
@@ -64,8 +64,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   }
 
   @override
-  Future fetchTickets() async {
-    final data = await rootBundle.loadString(KString.ticketPath);
+  Future fetchTickets(String path) async {
+
+    final data = await rootBundle.loadString(path);
 
     final decoded = json.decode(data); //convert String → dynamic
 

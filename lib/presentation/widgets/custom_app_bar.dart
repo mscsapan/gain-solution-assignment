@@ -4,36 +4,52 @@ import '../utils/constraints.dart';
 import '../utils/utils.dart';
 import 'custom_text.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
     this.isShowBackButton = true,
+    this.isCenterText,
+    this.height,
+    this.customWidget,
     this.textSize = 22.0,
-    this.fontWeight = FontWeight.w700,
+    this.fontWeight = FontWeight.w500,
     this.textColor = blackColor,
+    this.bgColor = whiteColor,
+    this.actions
   });
 
   final String title;
   final bool isShowBackButton;
+  final bool? isCenterText;
   final double textSize;
   final FontWeight fontWeight;
   final Color textColor;
+  final Color? bgColor;
+  final double? height;
+  final Widget? customWidget;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        isShowBackButton ? const BackButtonWidget() : const SizedBox(),
-        CustomText(
-          text: title,
-          fontSize: textSize,
-          fontWeight: fontWeight,
-          color: textColor,
-        )
-      ],
+    return customWidget?? AppBar(
+      automaticallyImplyLeading: isShowBackButton,
+      backgroundColor: whiteColor,
+      // backgroundColor: bgColor,
+      surfaceTintColor: bgColor,
+      centerTitle: isCenterText ?? true,
+      title: CustomText(
+        text: title,
+        fontSize: textSize,
+        fontWeight: fontWeight,
+        color: textColor,
+      ),
+      actions: actions,
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(Utils.vSize(height ?? 60.0));
 }
 
 class BackButtonWidget extends StatelessWidget {

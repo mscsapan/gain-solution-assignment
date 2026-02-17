@@ -39,8 +39,7 @@ class _TicketScreenState extends State<TicketScreen> {
       // appBar: CustomAppBar(title: 'Rewards'),
       body: PageRefresh(
         onRefresh: () async => await pointCubit.getPointHistory(),
-        child: BlocConsumer<TicketCubit, TicketItemModel>(
-            listener: (context, service) {},
+        child: BlocBuilder<TicketCubit, TicketItemModel>(
             builder: (context, service) {
               final state = service.ticketState;
               if (state is TicketFetching) {

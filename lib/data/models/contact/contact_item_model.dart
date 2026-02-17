@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import '../../../presentation/cubit/contact/contact_cubit.dart';
+
 class ContactItemModel extends Equatable {
   final int id;
   final String firstName;
@@ -13,6 +15,7 @@ class ContactItemModel extends Equatable {
   final String designation;
   final String address;
   final String image;
+  final ContactState contactState;
   const ContactItemModel({
     required this.id,
     required this.firstName,
@@ -23,6 +26,7 @@ class ContactItemModel extends Equatable {
     required this.designation,
     required this.address,
     required this.image,
+    this.contactState = const ContactInitial(),
   });
 
   ContactItemModel copyWith({
@@ -35,6 +39,7 @@ class ContactItemModel extends Equatable {
     String? designation,
     String? address,
     String? image,
+    ContactState? contactState,
   }) {
     return ContactItemModel(
       id: id ?? this.id,
@@ -46,6 +51,7 @@ class ContactItemModel extends Equatable {
       designation: designation ?? this.designation,
       address: address ?? this.address,
       image: image ?? this.image,
+      contactState: contactState ?? this.contactState,
     );
   }
 
@@ -84,6 +90,21 @@ class ContactItemModel extends Equatable {
   @override
   bool get stringify => true;
 
+  static ContactItemModel init(){
+    return ContactItemModel(
+      id : 0,
+      firstName : '',
+      lastName : '',
+      email : '',
+      gender : '',
+      phone : '',
+      designation : '',
+      address : '',
+      image : '',
+      contactState: ContactInitial(),
+    );
+  }
+
   @override
   List<Object?> get props {
     return [
@@ -96,6 +117,7 @@ class ContactItemModel extends Equatable {
       designation,
       address,
       image,
+      contactState,
     ];
   }
 }

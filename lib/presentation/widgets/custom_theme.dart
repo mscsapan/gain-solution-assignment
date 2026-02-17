@@ -9,27 +9,27 @@ class MyTheme {
   static final theme = ThemeData(
       //brightness: Brightness.light,
       primaryColor: whiteColor,
-      scaffoldBackgroundColor: scaffoldBgColor,
+      scaffoldBackgroundColor: whiteColor,
       // bottomSheetTheme: const BottomSheetThemeData(backgroundColor: whiteColor),
       // colorScheme: const ColorScheme.light(secondary: lightningYellowColor),
       appBarTheme: AppBarTheme(
         backgroundColor: grayBackgroundColor,
         centerTitle: true,
         scrolledUnderElevation: 0.0,
-        titleTextStyle: GoogleFonts.roboto(
+        titleTextStyle: GoogleFonts.montserrat(
             color: blackColor, fontSize: 20, fontWeight: FontWeight.bold),
         iconTheme: const IconThemeData(color: blackColor),
         elevation: 0,
       ),
-      textTheme: GoogleFonts.robotoTextTheme(
+      textTheme: GoogleFonts.montserratTextTheme(
         TextTheme(
-          bodySmall: GoogleFonts.roboto(fontSize: 12, height: 1.83),
-          bodyLarge: GoogleFonts.roboto(
+          bodySmall: GoogleFonts.montserrat(fontSize: 12, height: 1.83),
+          bodyLarge: GoogleFonts.montserrat(
               fontSize: 16, fontWeight: FontWeight.w500, height: 1.375),
-          bodyMedium: GoogleFonts.roboto(fontSize: 14, height: 1.5714),
-          labelLarge: GoogleFonts.roboto(
+          bodyMedium: GoogleFonts.montserrat(fontSize: 14, height: 1.5714),
+          labelLarge: GoogleFonts.montserrat(
               fontSize: 16, height: 2, fontWeight: FontWeight.w600),
-          titleLarge: GoogleFonts.roboto(
+          titleLarge: GoogleFonts.montserrat(
               fontSize: 16, height: 2, fontWeight: FontWeight.w600),
         ),
       ),
@@ -56,12 +56,12 @@ class MyTheme {
         elevation: 3,
         backgroundColor: whiteColor,
         showUnselectedLabels: true,
-        selectedLabelStyle: GoogleFonts.roboto(
+        selectedLabelStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.w600,
           color: primaryColor,
           fontSize: 14.0,
         ),
-        unselectedLabelStyle: GoogleFonts.roboto(
+        unselectedLabelStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.w600,
           color: grayColor,
           fontSize: 14.0,
@@ -71,24 +71,24 @@ class MyTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         isDense: true,
-        hintStyle: GoogleFonts.roboto(
+        hintStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.w400,
           fontSize: 16.0,
           color: grayColor,
         ),
-        labelStyle: GoogleFonts.roboto(
+        labelStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.w400,
           fontSize: 16.0,
           color: hintTextColor,
         ),
-        contentPadding: Utils.symmetric(v: 20.0),
+        contentPadding: Utils.symmetric(v: 14.0),
         border: OutlineInputBorder(
           borderRadius: borderRadius,
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: const BorderSide(color: primaryColor),
+          borderSide:  BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,

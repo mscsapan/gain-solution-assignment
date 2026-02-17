@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/cubit/contact/contact_cubit.dart';
 import 'package:gain_solution_task/presentation/cubit/ticket/ticket_cubit.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data/repositories/contact_repository_impl.dart';
 import 'data/repositories/ticket_repository_impl.dart';
 import 'dependency_injection_packages.dart';
+import 'domain/repositories/contact_repository.dart';
 import 'domain/repositories/ticket_repository.dart';
+import 'domain/usecases/contact/contact_usecases.dart';
 import 'domain/usecases/ticket/ticket_usecases.dart';
 
 class DependencyInjector {
@@ -57,6 +61,12 @@ class DependencyInjector {
       ),
     ),
 
+    RepositoryProvider<ContactRepository>(
+      create: (context) => ContactRepositoryImpl(
+        remoteDataSources: context.read(),
+      ),
+    ),
+
     // Combined Auth Use Cases
     RepositoryProvider<AuthUseCases>(
       create: (context) => AuthUseCases.create(context.read<AuthRepository>()),
@@ -67,6 +77,9 @@ class DependencyInjector {
 
     RepositoryProvider<TicketUseCases>(
       create: (context) => TicketUseCases.create(context.read<TicketRepository>()),
+    ),
+    RepositoryProvider<ContactUseCases>(
+      create: (context) => ContactUseCases.create(context.read<ContactRepository>()),
     ),
   ];
 
@@ -88,6 +101,11 @@ class DependencyInjector {
     BlocProvider<TicketCubit>(
       create: (BuildContext context) => TicketCubit(
         useCase: context.read<TicketUseCases>(),
+      ),
+    ),
+    BlocProvider<ContactCubit>(
+      create: (BuildContext context) => ContactCubit(
+        useCase: context.read<ContactUseCases>(),
       ),
     ),
   ];
