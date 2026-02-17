@@ -13,6 +13,7 @@ class CircleImage extends StatelessWidget {
     this.isFile,
     this.type = ImageType.circle,
     this.radius,
+    this.borderWidth,
     this.borderColor,
   });
 
@@ -21,6 +22,7 @@ class CircleImage extends StatelessWidget {
   final bool? isFile;
   final ImageType type;
   final double? radius;
+  final double? borderWidth;
   final Color? borderColor;
 
   @override
@@ -48,7 +50,7 @@ class CircleImage extends StatelessWidget {
         height: Utils.vSize(size),
         width: Utils.vSize(size),
         decoration:
-            BoxDecoration(shape: BoxShape.circle, border: Border.all(color: b)),
+            BoxDecoration(shape: BoxShape.circle, border: Border.all(color: b,width: borderWidth ?? 1.0)),
         child: ClipRRect(
           borderRadius: Utils.borderRadius(r: size / 2.0),
           child: CustomImage(

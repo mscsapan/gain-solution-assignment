@@ -39,6 +39,7 @@ dependencies:
   # flutter_html: ^3.0.0             # Render HTML content inside Flutter
   # webview_flutter: ^4.13.0         # Embed WebViews in Flutter
   rename: ^3.1.0                   # CLI tool to rename the Flutter project
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
