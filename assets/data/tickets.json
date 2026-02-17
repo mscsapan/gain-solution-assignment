@@ -1,0 +1,284 @@
+[
+  {
+    "id": "TCK-1001",
+    "subject": "Unable to login to dashboard",
+    "description": "User reports invalid credentials error after password reset.",
+    "customer": "Olivia Martin",
+    "email": "olivia.martin@example.com",
+    "brand": "GainHQ",
+    "priority": "High",
+    "status": "Open",
+    "tags": [
+      "login",
+      "bug"
+    ],
+    "createdAt": "2024-12-01T09:15:00Z"
+  },
+  {
+    "id": "TCK-1002",
+    "subject": "Billing invoice not generated",
+    "description": "Invoice missing for November subscription cycle.",
+    "customer": "Liam Johnson",
+    "email": "liam.johnson@example.com",
+    "brand": "Gains",
+    "priority": "Medium",
+    "status": "Pending",
+    "tags": [
+      "billing"
+    ],
+    "createdAt": "2024-12-01T10:20:00Z"
+  },
+  {
+    "id": "TCK-1003",
+    "subject": "Mobile app crashes on launch",
+    "description": "Crash occurs on iOS 17 devices.",
+    "customer": "Noah Williams",
+    "email": "noah.williams@example.com",
+    "brand": "GainSolution",
+    "priority": "Urgent",
+    "status": "Open",
+    "tags": [
+      "crash",
+      "mobile"
+    ],
+    "createdAt": "2024-12-01T11:05:00Z"
+  },
+  {
+    "id": "TCK-1004",
+    "subject": "Feature request: Dark mode",
+    "description": "Customer would like dark mode support.",
+    "customer": "Emma Brown",
+    "email": "emma.brown@example.com",
+    "brand": "GainHQ",
+    "priority": "Low",
+    "status": "Closed",
+    "tags": [
+      "feature"
+    ],
+    "createdAt": "2024-12-01T12:30:00Z"
+  },
+  {
+    "id": "TCK-1005",
+    "subject": "API response slow",
+    "description": "Reports latency over 3 seconds.",
+    "customer": "James Garcia",
+    "email": "james.garcia@example.com",
+    "brand": "Gains",
+    "priority": "High",
+    "status": "Open",
+    "tags": [
+      "performance"
+    ],
+    "createdAt": "2024-12-02T08:10:00Z"
+  },
+  {
+    "id": "TCK-1006",
+    "subject": "Payment failed but charged",
+    "description": "User charged twice for subscription.",
+    "customer": "Sophia Martinez",
+    "email": "sophia.m@example.com",
+    "brand": "GainSolution",
+    "priority": "Urgent",
+    "status": "Pending",
+    "tags": [
+      "payment"
+    ],
+    "createdAt": "2024-12-02T09:45:00Z"
+  },
+  {
+    "id": "TCK-1007",
+    "subject": "Unable to export report",
+    "description": "Export button does nothing.",
+    "customer": "Benjamin Anderson",
+    "email": "ben.anderson@example.com",
+    "brand": "GainHQ",
+    "priority": "Medium",
+    "status": "Open",
+    "tags": [
+      "report"
+    ],
+    "createdAt": "2024-12-02T10:15:00Z"
+  },
+  {
+    "id": "TCK-1008",
+    "subject": "Email notifications not received",
+    "description": "No alerts received for ticket updates.",
+    "customer": "Isabella Thomas",
+    "email": "isabella.t@example.com",
+    "brand": "Gains",
+    "priority": "Medium",
+    "status": "Open",
+    "tags": [
+      "email"
+    ],
+    "createdAt": "2024-12-02T11:00:00Z"
+  },
+  {
+    "id": "TCK-1009",
+    "subject": "Account suspended incorrectly",
+    "description": "User says no policy violation occurred.",
+    "customer": "Lucas Taylor",
+    "email": "lucas.t@example.com",
+    "brand": "GainSolution",
+    "priority": "High",
+    "status": "Pending",
+    "tags": [
+      "account"
+    ],
+    "createdAt": "2024-12-02T12:40:00Z"
+  },
+  {
+    "id": "TCK-1010",
+    "subject": "Search not returning results",
+    "description": "Search returns empty list.",
+    "customer": "Mia Moore",
+    "email": "mia.moore@example.com",
+    "brand": "GainHQ",
+    "priority": "High",
+    "status": "Open",
+    "tags": [
+      "search"
+    ],
+    "createdAt": "2024-12-03T08:00:00Z"
+  },
+  {
+    "id": "TCK-1011",
+    "subject": "Data sync issue",
+    "description": "Data not syncing between devices.",
+    "customer": "Ethan Jackson",
+    "email": "ethan.j@example.com",
+    "brand": "Gains",
+    "priority": "Medium",
+    "status": "Open",
+    "tags": [
+      "sync"
+    ],
+    "createdAt": "2024-12-03T09:10:00Z"
+  },
+  {
+    "id": "TCK-1012",
+    "subject": "UI misalignment on tablet",
+    "description": "Layout breaks on iPad.",
+    "customer": "Ava White",
+    "email": "ava.white@example.com",
+    "brand": "GainHQ",
+    "priority": "Low",
+    "status": "Closed",
+    "tags": [
+      "ui"
+    ],
+    "createdAt": "2024-12-03T10:25:00Z"
+  },
+  {
+    "id": "TCK-1013",
+    "subject": "Password reset email delay",
+    "description": "Email arrives after 10 minutes.",
+    "customer": "Alexander Harris",
+    "email": "alex.h@example.com",
+    "brand": "GainSolution",
+    "priority": "Low",
+    "status": "Open",
+    "tags": [
+      "email"
+    ],
+    "createdAt": "2024-12-03T11:30:00Z"
+  },
+  {
+    "id": "TCK-1014",
+    "subject": "Integration with Slack failing",
+    "description": "Webhook returns 403.",
+    "customer": "Charlotte Clark",
+    "email": "charlotte.c@example.com",
+    "brand": "Gains",
+    "priority": "High",
+    "status": "Pending",
+    "tags": [
+      "integration"
+    ],
+    "createdAt": "2024-12-03T12:10:00Z"
+  },
+  {
+    "id": "TCK-1015",
+    "subject": "Duplicate contacts created",
+    "description": "Contacts duplicated after import.",
+    "customer": "Daniel Lewis",
+    "email": "daniel.l@example.com",
+    "brand": "GainHQ",
+    "priority": "Medium",
+    "status": "Open",
+    "tags": [
+      "data"
+    ],
+    "createdAt": "2024-12-04T08:45:00Z"
+  },
+  {
+    "id": "TCK-1016",
+    "subject": "Subscription downgrade issue",
+    "description": "Plan not updated after downgrade.",
+    "customer": "Amelia Walker",
+    "email": "amelia.w@example.com",
+    "brand": "GainSolution",
+    "priority": "High",
+    "status": "Open",
+    "tags": [
+      "subscription"
+    ],
+    "createdAt": "2024-12-04T09:20:00Z"
+  },
+  {
+    "id": "TCK-1017",
+    "subject": "Attachment upload fails",
+    "description": "Upload stuck at 0%.",
+    "customer": "Henry Hall",
+    "email": "henry.h@example.com",
+    "brand": "Gains",
+    "priority": "Medium",
+    "status": "Open",
+    "tags": [
+      "upload"
+    ],
+    "createdAt": "2024-12-04T10:00:00Z"
+  },
+  {
+    "id": "TCK-1018",
+    "subject": "Two-factor authentication issue",
+    "description": "OTP not working.",
+    "customer": "Harper Allen",
+    "email": "harper.a@example.com",
+    "brand": "GainHQ",
+    "priority": "Urgent",
+    "status": "Open",
+    "tags": [
+      "security"
+    ],
+    "createdAt": "2024-12-04T11:30:00Z"
+  },
+  {
+    "id": "TCK-1019",
+    "subject": "Report totals incorrect",
+    "description": "Totals mismatch with raw data.",
+    "customer": "Sebastian Young",
+    "email": "sebastian.y@example.com",
+    "brand": "GainSolution",
+    "priority": "High",
+    "status": "Pending",
+    "tags": [
+      "report"
+    ],
+    "createdAt": "2024-12-04T12:15:00Z"
+  },
+  {
+    "id": "TCK-1020",
+    "subject": "Session timeout too short",
+    "description": "User logged out after 5 minutes.",
+    "customer": "Ella King",
+    "email": "ella.k@example.com",
+    "brand": "Gains",
+    "priority": "Low",
+    "status": "Open",
+    "tags": [
+      "session"
+    ],
+    "createdAt": "2024-12-04T13:00:00Z"
+  }
+]
