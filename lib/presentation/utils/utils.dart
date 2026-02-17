@@ -284,17 +284,28 @@ class Utils {
       return fileList;
     }*/
 
-  static String timeWithData(String data, [bool timeAndDate = true]) {
+  static String timeWithData(String? data, [bool timeAndDate = true]) {
+
+    if(data?.isEmpty??false) return '';
+
     if (timeAndDate) {
-      DateTime dateTime = DateTime.parse(data);
-      String formattedDate =
-          DateFormat('h:mm a - MMM d, yyyy').format(dateTime);
+      DateTime dateTime = DateTime.parse(data??'');
+      String formattedDate = DateFormat('MMM d, yyyy h:mm a').format(dateTime);
       return formattedDate;
     } else {
-      DateTime dateTime = DateTime.parse(data);
+      DateTime dateTime = DateTime.parse(data??'');
       String formattedDate = DateFormat('MMM d, yyyy').format(dateTime);
       return formattedDate;
     }
+  }
+
+  static Color ticketColor(String? status){
+    if(status?.isEmpty??false) return transparent;
+
+    if(status == 'Open') return greenColor;
+    if(status == 'Pending') return yellowColor;
+    if(status == 'Closed') return redColor;
+    return transparent;
   }
 
   static String formatDate(dynamic date) {

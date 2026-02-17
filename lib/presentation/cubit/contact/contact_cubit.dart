@@ -44,11 +44,7 @@ class ContactCubit extends Cubit<ContactItemModel> {
 
 
   void searchContact(String? name) {
-    // if (name == null || name.trim().isEmpty){
-    //   searchContacts?.clear();
-    //   emit(state.copyWith(contactState: ContactFetched(searchContacts)));
-    //   return;
-    // }
+
     if (name == null || name.trim().isEmpty) return;
 
     final query = name.toLowerCase();
@@ -59,12 +55,7 @@ class ContactCubit extends Cubit<ContactItemModel> {
       return fullName.contains(query);
     }).toList();
 
-    debugPrint('search-length-before ${searchContacts?.length}');
-    debugPrint('contact-length-before ${contacts?.length}');
-
     emit(state.copyWith(contactState: ContactFetched(searchContacts),id: searchContacts?.length));
-    debugPrint('search-length-after ${searchContacts?.length}');
-    debugPrint('contact-length-after ${contacts?.length}');
   }
 
 }

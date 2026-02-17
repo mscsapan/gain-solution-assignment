@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/utils/utils.dart';
 
+import '../../../core/services/navigation_service.dart';
 import '../../../data/models/ticket/ticket_item_model.dart';
 import '../../cubit/ticket/ticket_cubit.dart';
+import '../../routes/route_names.dart';
+import '../../utils/constraints.dart';
+import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_text.dart';
 import '../../widgets/fetch_error_text.dart';
 import '../../widgets/loading_widget.dart';
 import '../../widgets/page_refresh.dart';
+import 'component/ticket_component.dart';
 
 class TicketScreen extends StatefulWidget {
   const TicketScreen({super.key});
@@ -36,7 +42,7 @@ class _TicketScreenState extends State<TicketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: CustomAppBar(title: 'Rewards'),
+      appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
       body: PageRefresh(
         onRefresh: () async => await pointCubit.getPointHistory(),
         child: BlocBuilder<TicketCubit, TicketItemModel>(
@@ -73,12 +79,34 @@ class LoadedTicketView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: tickets?.length,
-      itemBuilder: (context, index) {
-        final ticketItem = tickets?[index];
-        return CustomText(text: ticketItem?.customer ?? '');
-      },);
+    return Padding(
+      padding: Utils.symmetric(h: 16.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomText(text: '${tickets?.length} tickets',fontWeight: FontWeight.w500,color: textRegular,letterSpacing:0.5),
+              GestureDetector(
+                  onTap: (){
+                    NavigationService.navigateTo(RouteNames.filterScreen);
+                  },
+                  child: Icon(Icons.filter_alt_outlined,size: 24.0,color: blackColor)),
+            ],
+          ),
+          Utils.verticalSpace(8.0),
+          Expanded(
+            child: ListView.builder(
+              itemCount: tickets?.length,
+              padding: Utils.only(bottom: Utils.mediaQuery(context).height * 0.05),
+              itemBuilder: (context, index) {
+                final ticketItem = tickets?[index];
+                return TicketComponent(ticketItem:ticketItem,index: index);
+              },),
+          ),
+        ],
+      ),
+    );
   }
 }
 
