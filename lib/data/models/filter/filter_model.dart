@@ -4,11 +4,11 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class FilterModel extends Equatable {
-  final String? id;
-  final String? type;
-  final String? label;
+  final String id;
+  final String type;
+  final String label;
   final List<Map<String, dynamic>?>? options;
-  const FilterModel({this.id, this.type, this.label, this.options});
+  const FilterModel({required this.id, required this.type, required this.label, this.options});
 
   FilterModel copyWith({
     String? id,
@@ -35,16 +35,16 @@ class FilterModel extends Equatable {
 
   factory FilterModel.fromMap(Map<String, dynamic> map) {
     return FilterModel(
-      id: map['id'] != null ? map['id'] as String : null,
-      type: map['type'] != null ? map['type'] as String : null,
-      label: map['label'] != null ? map['label'] as String : null,
+      id: map['id'] ?? 0,
+      type: map['type'] ?? '',
+      label: map['label'] ?? '',
       options: map['options'] != null
           ? List<Map<String, dynamic>?>.from(
-              (map['options'] as List<int>).map<Map<String, dynamic?>?>(
+              (map['options'] as List<dynamic>).map<Map<String, dynamic?>?>(
                 (x) => x,
               ),
             )
-          : null,
+          : [],
     );
   }
 

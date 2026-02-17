@@ -52,8 +52,8 @@ class ContactItemModel extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'firstName': firstName,
-      'lastName': lastName,
+      'first_name': firstName,
+      'last_name': lastName,
       'email': email,
       'gender': gender,
       'phone': phone,
@@ -65,28 +65,27 @@ class ContactItemModel extends Equatable {
 
   factory ContactItemModel.fromMap(Map<String, dynamic> map) {
     return ContactItemModel(
-      id: map['id'] as int,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
-      email: map['email'] as String,
-      gender: map['gender'] as String,
-      phone: map['phone'] as String,
-      designation: map['designation'] as String,
-      address: map['address'] as String,
-      image: map['image'] as String,
+      id: map['id'] ?? 0,
+      firstName: map['first_name'] ?? '',
+      lastName: map['last_name'] ?? '',
+      email: map['email'] ?? '',
+      gender: map['gender'] ?? '',
+      phone: map['phone'] ?? '',
+      designation: map['designation'] ?? '',
+      address: map['address'] ?? '',
+      image: map['image'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ContactItemModel.fromJson(String source) =>
-      ContactItemModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ContactItemModel.fromJson(String source) => ContactItemModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       firstName,

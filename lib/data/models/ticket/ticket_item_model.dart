@@ -23,7 +23,7 @@ class TicketItemModel extends Equatable {
     required this.brand,
     required this.priority,
     required this.status,
-    this.tags,
+    required this.tags,
     required this.createdAt,
   });
 
@@ -63,23 +63,23 @@ class TicketItemModel extends Equatable {
       'brand': brand,
       'priority': priority,
       'status': status,
-      'tags': tags.map((x) => x?.toMap()).toList(),
+      'tags': tags?.map((x) => x).toList(),
       'createdAt': createdAt,
     };
   }
 
   factory TicketItemModel.fromMap(Map<String, dynamic> map) {
     return TicketItemModel(
-      id: map['id'] as String,
-      subject: map['subject'] as String,
-      description: map['description'] as String,
-      customer: map['customer'] as String,
-      email: map['email'] as String,
-      brand: map['brand'] as String,
-      priority: map['priority'] as String,
-      status: map['status'] as String,
-      tags: map['tags'] != null ? List<String?>.from((map['tags'] as List<int>).map<String??>((x) => String?.fromMap(x as Map<String,dynamic>),),) : null,
-      createdAt: map['createdAt'] as String,
+      id: map['id'] ?? 0,
+      subject: map['subject'] ?? '',
+      description: map['description'] ?? '',
+      customer: map['customer'] ?? '',
+      email: map['email'] ?? '',
+      brand: map['brand'] ?? '',
+      priority: map['priority'] ?? '',
+      status: map['status'] ?? '',
+      tags: map['tags'] != null ? List<String?>.from((map['tags'] as List<dynamic>).map<String?>((x) => x.toString())) : [],
+      createdAt: map['createdAt'] ?? '',
     );
   }
 
