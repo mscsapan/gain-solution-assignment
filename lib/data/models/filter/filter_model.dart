@@ -18,6 +18,8 @@ class FilterModel extends Equatable {
   final double minPrice;
   final double maxPrice;
 
+  final FilterModel ? filter;
+
   final FilterState filterState;
 
   const FilterModel({
@@ -31,6 +33,7 @@ class FilterModel extends Equatable {
     this.minPrice = 0.0,
     this.maxPrice = 0.0,
     this.options = const [],
+    this.filter,
     this.filterState = const FilterInitial(),
   });
 
@@ -46,6 +49,7 @@ class FilterModel extends Equatable {
     String? status,
     double? minPrice,
     double? maxPrice,
+    FilterModel ? filter,
     FilterState? filterState,
   }) {
     return FilterModel(
@@ -59,6 +63,7 @@ class FilterModel extends Equatable {
       status: status ?? this.status,
       minPrice: minPrice ?? this.minPrice,
       maxPrice: maxPrice ?? this.maxPrice,
+      filter: filter ?? this.filter,
       filterState: filterState ?? this.filterState,
     );
   }
@@ -108,5 +113,6 @@ class FilterModel extends Equatable {
     status,
     minPrice,
     maxPrice,
+    filter,
   ];
 }

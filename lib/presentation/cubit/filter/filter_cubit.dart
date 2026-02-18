@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/mappers/filter/filter_item_mapper.dart';
-import '../../../data/mappers/filter/filter_mapper.dart';
 import '../../../data/models/filter/filter_item_model.dart';
 import '../../../data/models/filter/filter_model.dart';
 import '../../../domain/usecases/filter/filter_usecases.dart';
@@ -20,6 +19,12 @@ class FilterCubit extends Cubit<FilterModel> {
         super(FilterModel());
 
   FilterItemModel? filterData;
+
+  void addFilterInfo(FilterModel Function(FilterModel existing) updateFn) {
+    final existing = state.filter ?? FilterModel();
+    final updated = updateFn(existing);
+    emit(state.copyWith(filter: updated));
+  }
 
   Future<void> getFilterData() async {
     emit(state.copyWith(filterState: FilterFetching()));
@@ -37,6 +42,10 @@ class FilterCubit extends Cubit<FilterModel> {
           final loaded = FilterFetched(filterData);
 
           debugPrint('loaded-filters $filterData');
+
+          final options = filterData?.brands?.options?.map((e)=>e?['value']).toList();
+
+          debugPrint('options $options');
 
           Future.delayed(Duration(seconds: 1), () {
             emit(state.copyWith(filterState: loaded));

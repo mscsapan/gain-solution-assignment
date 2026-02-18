@@ -8,6 +8,7 @@ const grayColor = Color(0xFF535769);
 const cardBgColor = Color(0xFFF9FAFB);
 const cardBorderColor = Color(0xFFD8E0ED);
 const textRegular = Color(0xFF797979);
+const textBorderRegular = Color(0xFF5C5D76);
 const textLight = Color(0xFFB7B7B7);
 Color hintTextColor = const Color(0xFF000000).withValues(alpha:0.2);
 

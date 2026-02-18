@@ -100,55 +100,97 @@ class LoadedFilterData extends StatelessWidget {
   const LoadedFilterData({super.key, required this.filters});
   final FilterItemModel ? filters;
 
+
+
   @override
   Widget build(BuildContext context) {
+    final filterCubit = context.read<FilterCubit>();
     return ListView(
+      padding: Utils.symmetric(),
       children: [
-        // ...List.generate(filters?.length??0, (index){
-        //   final item = filters?[index];
-        //   return Padding(
-        //     padding: Utils.symmetric(v: 4.0,h: 0.0),
-        //
-        //     child: Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Expanded(
-        //           child: CustomText(text: item,fontSize: 16.0,fontWeight: FontWeight.w400,color: blackColor),
-        //         ),
-        //
-        //         Transform.scale(
-        //           scale: 1.2,
-        //           child: Checkbox(
-        //             value: state.filterModel?.tags?.contains(item),
-        //             activeColor: primaryColor,
-        //             side: BorderSide(color: const Color(0xFFE7E7E7)),
-        //             onChanged: (val) {
-        //               if (val == null) return;
-        //
-        //               final sizes = List<String>.from(state.filterModel?.tags ?? const <String>[]);
-        //
-        //               final tag = item;
-        //
-        //               if (val) {
-        //                 if (!sizes.contains(tag)) sizes.add(tag);
-        //               } else {
-        //                 sizes.remove(tag);
-        //               }
-        //
-        //               productCubit.addFilterInfo((e) => e.copyWith(tags: sizes));
-        //             },
-        //             visualDensity: const VisualDensity(
-        //               horizontal: -4.0,
-        //               vertical: -4.0,
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   );
-        // })
+        _titleText(filters?.brands?.label),
+        ...List.generate(filters?.brands?.options?.length??0, (index){
+          final item = filters?.brands?.options?[index]?['value']?? '';
+
+          void toggleBrand(String tag) {
+            final brands = List<String>.from(
+              filterCubit.state.filter?.brands ?? const <String>[],
+            );
+
+            if (brands.contains(tag)) {
+              brands.remove(tag);
+            } else {
+              brands.add(tag);
+            }
+
+            filterCubit.addFilterInfo((e) => e.copyWith(brands: brands));
+          }
+
+          return Padding(
+            padding: Utils.symmetric(v: 4.0,h: 0.0),
+            child: InkWell(
+              onTap: () => toggleBrand(item),
+              child: Row(
+                children: [
+                  Transform.scale(
+                    scale: 1.2,
+                    child: Checkbox(
+                      value: filterCubit.state.filter?.brands?.contains(item) ?? false,
+                      onChanged: (_) => toggleBrand(item),
+                      // visualDensity: const VisualDensity(
+                      //   // horizontal: -2.0,
+                      //   vertical: -4.0,
+                      // ),
+                    ),
+                  ),
+                  Expanded(child: CustomText(text: item,fontSize: 14.0,fontWeight: FontWeight.w500,color: textBorderRegular)),
+
+                ],
+              ),
+            )
+            ,
+          );
+        }),
+        _titleText(filters?.tags?.label),
+        Utils.verticalSpace(8.0),
+        TextFormField(
+          // onChanged: (val) => cCubit.searchContact(val),
+          decoration: InputDecoration(
+              hintText: 'Search tags',
+              border: inputBorder,
+              enabledBorder: inputBorder,
+              focusedBorder: inputBorder,
+              filled: true,
+              fillColor: grayBackgroundColor,
+              prefixIcon: Icon(Icons.search_outlined, color: blackColor,)
+          ),
+        ),
+        Utils.verticalSpace(12.0),
+        Wrap(
+          runSpacing: 10.0,
+          spacing: 10.0,
+          children: List.generate(filters?.tags?.options?.length??0, (index){
+            final tag = filters?.tags?.options?[index]?['value']?? '';
+            return Container(
+              padding: Utils.symmetric(h: 12.0,v: 6.0),
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: Utils.borderRadius(r: 8.0),
+                border: Border.all(color: cardBorderColor),
+              ),
+              child:CustomText(text: Utils.capitalizeFirstLetter(tag),color: textRegular,fontSize: 12.0,fontWeight: FontWeight.w500,),
+            );
+          }),
+        ),
       ],
     );
   }
+
+  Widget _titleText(String ? text){
+    return Expanded(child: CustomText(text: text??'' ,fontSize: 16.0,fontWeight: FontWeight.w600,color: blackColor));
+
+  }
 }
+
+
 
