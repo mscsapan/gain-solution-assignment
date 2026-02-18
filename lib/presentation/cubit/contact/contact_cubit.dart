@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/mappers/contact/contact_item_mapper.dart';
 import '../../../data/models/contact/contact_item_model.dart';

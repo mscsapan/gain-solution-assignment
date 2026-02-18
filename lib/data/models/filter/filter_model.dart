@@ -3,24 +3,63 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import '../../../presentation/cubit/filter/filter_cubit.dart';
+
 class FilterModel extends Equatable {
   final String id;
   final String type;
   final String label;
   final List<Map<String, dynamic>?>? options;
-  const FilterModel({required this.id, required this.type, required this.label, this.options});
+
+  final List<String?> ? brands;
+  final List<String?> ? tags;
+  final String priority;
+  final String status;
+  final double minPrice;
+  final double maxPrice;
+
+  final FilterState filterState;
+
+  const FilterModel({
+    this.id = '',
+    this.type = '',
+    this.label = '',
+    this.brands = const [],
+    this.tags = const [],
+    this.priority = '',
+    this.status = '',
+    this.minPrice = 0.0,
+    this.maxPrice = 0.0,
+    this.options = const [],
+    this.filterState = const FilterInitial(),
+  });
 
   FilterModel copyWith({
     String? id,
     String? type,
     String? label,
     List<Map<String, dynamic>?>? options,
+
+    List<String?> ? brands,
+    List<String?> ? tags,
+    String? priority,
+    String? status,
+    double? minPrice,
+    double? maxPrice,
+    FilterState? filterState,
   }) {
     return FilterModel(
       id: id ?? this.id,
       type: type ?? this.type,
       label: label ?? this.label,
       options: options ?? this.options,
+      brands: brands ?? this.brands,
+      tags: tags ?? this.tags,
+      priority: priority ?? this.priority,
+      status: status ?? this.status,
+      minPrice: minPrice ?? this.minPrice,
+      maxPrice: maxPrice ?? this.maxPrice,
+      filterState: filterState ?? this.filterState,
     );
   }
 
@@ -40,7 +79,7 @@ class FilterModel extends Equatable {
       label: map['label'] ?? '',
       options: map['options'] != null
           ? List<Map<String, dynamic>?>.from(
-              (map['options'] as List<dynamic>).map<Map<String, dynamic?>?>(
+              (map['options'] as List<dynamic>).map<Map<String, dynamic>?>(
                 (x) => x,
               ),
             )
@@ -57,5 +96,17 @@ class FilterModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [id, type, label, options];
+  List<Object?> get props => [
+    id,
+    type,
+    label,
+    options,
+    filterState,
+    brands,
+    tags,
+    priority,
+    status,
+    minPrice,
+    maxPrice,
+  ];
 }

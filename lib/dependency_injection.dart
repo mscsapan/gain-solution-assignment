@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gain_solution_task/presentation/cubit/contact/contact_cubit.dart';
-import 'package:gain_solution_task/presentation/cubit/ticket/ticket_cubit.dart';
+
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data/repositories/contact_repository_impl.dart';
-import 'data/repositories/ticket_repository_impl.dart';
 import 'dependency_injection_packages.dart';
-import 'domain/repositories/contact_repository.dart';
-import 'domain/repositories/ticket_repository.dart';
-import 'domain/usecases/contact/contact_usecases.dart';
-import 'domain/usecases/ticket/ticket_usecases.dart';
+
 
 class DependencyInjector {
   static late final SharedPreferences _sharedPreferences;
@@ -67,6 +61,12 @@ class DependencyInjector {
       ),
     ),
 
+    RepositoryProvider<FilterRepository>(
+      create: (context) => FilterRepositoryImpl(
+        remoteDataSources: context.read(),
+      ),
+    ),
+
     // Combined Auth Use Cases
     RepositoryProvider<AuthUseCases>(
       create: (context) => AuthUseCases.create(context.read<AuthRepository>()),
@@ -80,6 +80,9 @@ class DependencyInjector {
     ),
     RepositoryProvider<ContactUseCases>(
       create: (context) => ContactUseCases.create(context.read<ContactRepository>()),
+    ),
+    RepositoryProvider<FilterUseCases>(
+      create: (context) => FilterUseCases.create(context.read<FilterRepository>()),
     ),
   ];
 
@@ -106,6 +109,11 @@ class DependencyInjector {
     BlocProvider<ContactCubit>(
       create: (BuildContext context) => ContactCubit(
         useCase: context.read<ContactUseCases>(),
+      ),
+    ),
+    BlocProvider<FilterCubit>(
+      create: (BuildContext context) => FilterCubit(
+        useCase: context.read<FilterUseCases>(),
       ),
     ),
   ];

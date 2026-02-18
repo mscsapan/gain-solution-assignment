@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -31,6 +32,7 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const kNetImg = 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png';
+    // const kNetImg = KImages.defaultImg;
     // final imagePath = path ?? kNetImg;
 
     final imagePath = (path?.endsWith('.avif') ?? false)

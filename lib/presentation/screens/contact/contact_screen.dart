@@ -119,7 +119,7 @@ class LoadedContactView extends StatelessWidget {
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemBuilder: (context, index) {
                 final contactItem = cCubit.searchContacts?[index];
-                return ContactComponent(contactItem: contactItem);
+                return ContactComponent(contactItem: contactItem,index:index);
               },),),
           ] else
             ...[

@@ -8,11 +8,13 @@ import '../../../../data/models/contact/contact_item_model.dart';
 import '../../../widgets/custom_text.dart';
 
 class ContactComponent extends StatelessWidget {
-  const ContactComponent({super.key, this.contactItem});
+  const ContactComponent({super.key, this.contactItem,required this.index});
   final ContactItemModel ? contactItem;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final image = 'https://randomuser.me/api/portraits/${contactItem?.gender == 'Male'? 'male':'women'}/$index.jpg';
     return Container(
       padding: Utils.all(value: 12.0),
       margin: Utils.symmetric(h: 0.0,v: 0.0).copyWith(bottom: 12.0),
@@ -30,7 +32,8 @@ class ContactComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 12.0,
                 children: [
-                  CircleImage(size: 40.0,type: ImageType.border,borderColor: cardBorderColor,image: contactItem?.image??KImages.defaultImg,borderWidth: 2.0,),
+                  // CircleImage(size: 40.0,type: ImageType.border,borderColor: cardBorderColor,image: contactItem?.image??KImages.defaultImg,borderWidth: 2.0,),
+                  CircleImage(size: 40.0,type: ImageType.border,borderColor: cardBorderColor,image: image,borderWidth: 2.0,),
                   CustomText(text: '${contactItem?.firstName} ${contactItem?.lastName}',fontWeight: FontWeight.w600,color: blackColor,fontSize: 16.0,letterSpacing: 0.15,),
                 ],
               ),
