@@ -23,7 +23,7 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen> {
 
-  late ContactCubit pointCubit;
+  late ContactCubit contactCubit;
 
   @override
   void initState() {
@@ -32,9 +32,9 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   void _initState() {
-    pointCubit = context.read<ContactCubit>();
+    contactCubit = context.read<ContactCubit>();
 
-    Future.microtask(()=>pointCubit.getContacts());
+    Future.microtask(()=>contactCubit.getContacts());
 
   }
 
@@ -45,8 +45,8 @@ class _ContactScreenState extends State<ContactScreen> {
       appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
       body: PageRefresh(
         onRefresh: () async {
-          pointCubit.searchContacts?.clear();
-          await pointCubit.getContacts();
+          contactCubit.searchContacts?.clear();
+          await contactCubit.getContacts();
         },
         child: BlocBuilder<ContactCubit, ContactItemModel>(
             builder: (context, service) {
@@ -55,15 +55,15 @@ class _ContactScreenState extends State<ContactScreen> {
                 return const LoadingWidget();
               } else if (state is ContactFetchError) {
                 if (state.statusCode == 503) {
-                  return LoadedContactView(contacts: pointCubit.searchContacts);
+                  return LoadedContactView(contacts: contactCubit.searchContacts);
                 } else {
                   return FetchErrorText(text: state.message);
                 }
               } else if (state is ContactFetched) {
                 return LoadedContactView(contacts: state.contacts);
               }
-              if (pointCubit.searchContacts?.isNotEmpty??false) {
-               return LoadedContactView(contacts: pointCubit.searchContacts);
+              if (contactCubit.searchContacts?.isNotEmpty??false) {
+               return LoadedContactView(contacts: contactCubit.searchContacts);
               } else {
                 return FetchErrorText(text: 'Something went wrong');
               }

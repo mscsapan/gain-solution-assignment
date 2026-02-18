@@ -16,7 +16,7 @@ final class FilterFetching extends FilterState {}
 
 final class FilterFetched extends FilterState {
 
-  final List<FilterModel?>? filterData;
+  final FilterItemModel? filterData;
 
   const FilterFetched(this.filterData);
 

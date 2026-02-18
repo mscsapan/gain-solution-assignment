@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../core/failures/failures.dart';
 import '../../../core/usecases/usecase.dart';
-import '../../entities/filter/filter_entity.dart';
+import '../../entities/filter/filter_item_entity.dart';
 import '../../repositories/filter_repository.dart';
 
 class FilterUseCases extends Equatable {
@@ -24,13 +24,13 @@ class FilterUseCases extends Equatable {
   List<Object?> get props => [fetchFilters];
 }
 
-class FetchFilters implements UseCase<List<FilterEntity?>?, NoParams> {
+class FetchFilters implements UseCase<FilterItemEntity?, NoParams> {
   final FilterRepository repository;
 
   FetchFilters(this.repository);
 
   @override
-  Future<Either<Failure, List<FilterEntity?>?>> call([NoParams? params]) async {
+  Future<Either<Failure, FilterItemEntity?>> call([NoParams? params]) async {
     return await repository.fetchFilters();
   }
 }

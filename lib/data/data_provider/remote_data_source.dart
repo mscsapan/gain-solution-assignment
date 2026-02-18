@@ -70,7 +70,13 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
     final decoded = json.decode(data); //convert String → dynamic
 
-    return decoded as List<dynamic>;
+    if (decoded is List) {
+      return decoded;
+    } else if (decoded is Map<String, dynamic>) {
+      return decoded;
+    } else {
+      return [];
+    }
   }
 
 // @override

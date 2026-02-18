@@ -1,54 +1,46 @@
 {
-  "version": 1,
-  "filters": [
-    {
-      "id": "brand",
-      "type": "multi_select",
-      "label": "Brand",
-      "options": [
-        { "value": "Gains", "count": 6 },
-        { "value": "GainHQ", "count": 7 },
-        { "value": "GainSolution", "count": 7 }
-      ]
-    },
-    {
-      "id": "priority",
-      "type": "single_select",
-      "label": "Priority",
-      "options": [
-        { "value": "Low" },
-        { "value": "Medium" },
-        { "value": "High" },
-        { "value": "Urgent" }
-      ]
-    },
-    {
-      "id": "status",
-      "type": "single_select",
-      "label": "Status",
-      "options": [
-        { "value": "Open" },
-        { "value": "Pending" },
-        { "value": "Closed" }
-      ]
-    },
-    {
-      "id": "tags",
-      "type": "chip_select",
-      "label": "Tags",
-      "options": [
-        { "value": "billing" },
-        { "value": "bug" },
-        { "value": "feature" },
-        { "value": "performance" },
-        { "value": "security" },
-        { "value": "integration" }
-      ]
-    },
-    {
-      "id": "createdDate",
-      "type": "date_range",
-      "label": "Created Date"
-    }
-  ]
+  "brands":  {
+    "id": "brand",
+    "type": "multi_select",
+    "label": "Brand",
+    "options": [
+      { "value": "Gains", "count": 6 },
+      { "value": "GainHQ", "count": 7 },
+      { "value": "GainSolution", "count": 7 }
+    ]
+  },
+  "priority" :  {
+    "id": "priority",
+    "type": "single_select",
+    "label": "Priority",
+    "options": [
+      { "value": "Low" },
+      { "value": "Medium" },
+      { "value": "High" },
+      { "value": "Urgent" }
+    ]
+  },
+  "status":   {
+    "id": "status",
+    "type": "single_select",
+    "label": "Status",
+    "options": [
+      { "value": "Open" },
+      { "value": "Pending" },
+      { "value": "Closed" }
+    ]
+  },
+  "tags":  {
+    "id": "tags",
+    "type": "chip_select",
+    "label": "Tags",
+    "options": [
+      { "value": "billing" },
+      { "value": "bug" },
+      { "value": "feature" },
+      { "value": "performance" },
+      { "value": "security" },
+      { "value": "integration" }
+    ]
+  }
 }
