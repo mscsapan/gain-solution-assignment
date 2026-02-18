@@ -15,6 +15,7 @@ class ContactItemModel extends Equatable {
   final String designation;
   final String address;
   final String image;
+  final List<ContactItemModel?>? contacts;
   final ContactState contactState;
   const ContactItemModel({
     required this.id,
@@ -26,6 +27,7 @@ class ContactItemModel extends Equatable {
     required this.designation,
     required this.address,
     required this.image,
+    this.contacts = const [],
     this.contactState = const ContactInitial(),
   });
 
@@ -39,6 +41,7 @@ class ContactItemModel extends Equatable {
     String? designation,
     String? address,
     String? image,
+    List<ContactItemModel?>? contacts,
     ContactState? contactState,
   }) {
     return ContactItemModel(
@@ -51,6 +54,7 @@ class ContactItemModel extends Equatable {
       designation: designation ?? this.designation,
       address: address ?? this.address,
       image: image ?? this.image,
+      contacts: contacts ?? this.contacts,
       contactState: contactState ?? this.contactState,
     );
   }
@@ -101,6 +105,7 @@ class ContactItemModel extends Equatable {
       designation : '',
       address : '',
       image : '',
+      contacts: const [],
       contactState: ContactInitial(),
     );
   }
@@ -117,6 +122,7 @@ class ContactItemModel extends Equatable {
       designation,
       address,
       image,
+      contacts,
       contactState,
     ];
   }

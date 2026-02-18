@@ -15,6 +15,8 @@ class ContactCubit extends Cubit<ContactItemModel> {
       super(ContactItemModel.init());
 
   List<ContactItemModel?>? contacts = [];
+
+  List<ContactItemModel?>? allContacts = [];
   List<ContactItemModel?>? searchContacts = [];
 
   Future<void> getContacts() async {
@@ -32,29 +34,54 @@ class ContactCubit extends Cubit<ContactItemModel> {
 
         final loaded = ContactFetched(contacts);
 
+        allContacts = contacts;
+        searchContacts = List.from(allContacts??[]);
+
         //debugPrint('loaded-Contacts $contacts');
 
         Future.delayed(Duration(seconds: 1), () {
-          emit(state.copyWith(contactState: loaded));
+          emit(state.copyWith(contactState: loaded,contacts: searchContacts));
         });
       },
     );
   }
 
+  // void searchContact(String? name) {
+  //
+  //   if (name == null || name.trim().isEmpty) return;
+  //
+  //   final query = name.toLowerCase();
+  //
+  //   searchContacts = contacts?.where((customer) {
+  //     final fullName = '${customer?.firstName ?? ''} ${customer?.lastName ?? ''}'.toLowerCase();
+  //
+  //     return fullName.contains(query);
+  //   }).toList();
+  //
+  //   emit(state.copyWith(contacts: searchContacts);
+  // }
 
   void searchContact(String? name) {
 
-    if (name == null || name.trim().isEmpty) return;
+    final original = allContacts ??[];
+
+    if (name == null || name.trim().isEmpty) {
+      contacts = List.from(original); // restore full list
+      emit(state.copyWith(contacts: contacts));
+      return;
+    }
 
     final query = name.toLowerCase();
 
-    searchContacts = contacts?.where((customer) {
-      final fullName = '${customer?.firstName ?? ''} ${customer?.lastName ?? ''}'.toLowerCase();
+    contacts = original.where((customer) {
+      final fullName =
+      '${customer?.firstName ?? ''} ${customer?.lastName ?? ''}'.toLowerCase();
 
       return fullName.contains(query);
     }).toList();
 
-    emit(state.copyWith(contactState: ContactFetched(searchContacts),id: searchContacts?.length));
+    emit(state.copyWith(contacts: contacts));
   }
+
 
 }

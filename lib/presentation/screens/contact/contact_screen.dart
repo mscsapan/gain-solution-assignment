@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gain_solution_task/presentation/utils/k_images.dart';
-import 'package:gain_solution_task/presentation/widgets/circle_image.dart';
 import '/presentation/utils/constraints.dart';
 import '/presentation/utils/utils.dart';
 
@@ -45,7 +43,7 @@ class _ContactScreenState extends State<ContactScreen> {
       appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
       body: PageRefresh(
         onRefresh: () async {
-          contactCubit.searchContacts?.clear();
+          //contactCubit.searchContacts?.clear();
           await contactCubit.getContacts();
         },
         child: BlocBuilder<ContactCubit, ContactItemModel>(
@@ -100,25 +98,25 @@ class LoadedContactView extends StatelessWidget {
             ),
           ),
 
-          if(cCubit.searchContacts?.isNotEmpty??false)...[
+          if(cCubit.contacts?.isNotEmpty??false)...[
             Padding(
               padding: Utils.symmetric(h: 0.0,v: 14.0),
               child: Align(
                   alignment: Alignment.centerLeft,
-                  child: CustomText(text: '${cCubit.searchContacts?.length} Contacts',fontWeight: FontWeight.w500,color: textRegular,letterSpacing:0.5)),
+                  child: CustomText(text: '${cCubit.contacts?.length} Contacts',fontWeight: FontWeight.w500,color: textRegular,letterSpacing:0.5)),
             ),
           ]else...[
             Utils.verticalSpace(20.0)
           ],
 
 
-          if(cCubit.searchContacts?.isNotEmpty ?? false)...[
+          if(cCubit.contacts?.isNotEmpty ?? false)...[
             Expanded(child: ListView.builder(
-              itemCount: cCubit.searchContacts?.length,
+              itemCount: cCubit.contacts?.length,
               padding: Utils.only(bottom: Utils.mediaQuery(context).height * 0.05),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemBuilder: (context, index) {
-                final contactItem = cCubit.searchContacts?[index];
+                final contactItem = cCubit.contacts?[index];
                 return ContactComponent(contactItem: contactItem,index:index);
               },),),
           ] else
