@@ -33,3 +33,13 @@ final class FilterFetchError extends FilterState {
   @override
   List<Object?> get props => [message, statusCode];
 }
+
+final class FilterTagSearch extends FilterState {
+
+  final List<String?>? tags;
+
+  const FilterTagSearch(this.tags);
+
+  @override
+  List<Object?> get props => [tags];
+}

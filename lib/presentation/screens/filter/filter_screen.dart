@@ -113,9 +113,8 @@ class LoadedFilterData extends StatelessWidget {
           final item = filters?.brands?.options?[index]?['value']?? '';
 
           void toggleBrand(String tag) {
-            final brands = List<String>.from(
-              filterCubit.state.filter?.brands ?? const <String>[],
-            );
+
+            final brands = List<String>.from(filterCubit.state.filter?.brands ?? const <String>[]);
 
             if (brands.contains(tag)) {
               brands.remove(tag);
@@ -154,7 +153,7 @@ class LoadedFilterData extends StatelessWidget {
         _titleText(filters?.tags?.label),
         Utils.verticalSpace(8.0),
         TextFormField(
-          // onChanged: (val) => cCubit.searchContact(val),
+          onChanged: (val) => filterCubit.searchTag(val),
           decoration: InputDecoration(
               hintText: 'Search tags',
               border: inputBorder,
@@ -169,8 +168,11 @@ class LoadedFilterData extends StatelessWidget {
         Wrap(
           runSpacing: 10.0,
           spacing: 10.0,
-          children: List.generate(filters?.tags?.options?.length??0, (index){
-            final tag = filters?.tags?.options?[index]?['value']?? '';
+          children: List.generate(filterCubit.state.tags?.length??0, (index){
+            final tag = filterCubit.state.tags?[index]?? '';
+
+            // children: List.generate(filters?.tags?.options?.length??0, (index){
+            // final tag = filters?.tags?.options?[index]?['value']?? '';
             return Container(
               padding: Utils.symmetric(h: 12.0,v: 6.0),
               decoration: BoxDecoration(
@@ -182,12 +184,35 @@ class LoadedFilterData extends StatelessWidget {
             );
           }),
         ),
+        // BlocBuilder<FilterCubit, FilterModel>(
+        //   builder: (context, state) {
+        //     return Wrap(
+        //       runSpacing: 10.0,
+        //       spacing: 10.0,
+        //       children: List.generate(filterCubit.state.tags?.length??0, (index){
+        //         final tag = filterCubit.state.tags?[index]?? '';
+        //
+        //         // children: List.generate(filters?.tags?.options?.length??0, (index){
+        //         // final tag = filters?.tags?.options?[index]?['value']?? '';
+        //         return Container(
+        //           padding: Utils.symmetric(h: 12.0,v: 6.0),
+        //           decoration: BoxDecoration(
+        //             color: whiteColor,
+        //             borderRadius: Utils.borderRadius(r: 8.0),
+        //             border: Border.all(color: cardBorderColor),
+        //           ),
+        //           child:CustomText(text: Utils.capitalizeFirstLetter(tag),color: textRegular,fontSize: 12.0,fontWeight: FontWeight.w500,),
+        //         );
+        //       }),
+        //     );
+        //   },
+        // ),
       ],
     );
   }
 
   Widget _titleText(String ? text){
-    return Expanded(child: CustomText(text: text??'' ,fontSize: 16.0,fontWeight: FontWeight.w600,color: blackColor));
+    return CustomText(text: text??'' ,fontSize: 16.0,fontWeight: FontWeight.w600,color: blackColor);
 
   }
 }

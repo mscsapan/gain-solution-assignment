@@ -20,6 +20,10 @@ class FilterCubit extends Cubit<FilterModel> {
 
   FilterItemModel? filterData;
 
+  List<String?>? allTags = [];
+  List<String?>? tags = [];
+
+
   void addFilterInfo(FilterModel Function(FilterModel existing) updateFn) {
     final existing = state.filter ?? FilterModel();
     final updated = updateFn(existing);
@@ -41,17 +45,37 @@ class FilterCubit extends Cubit<FilterModel> {
 
           final loaded = FilterFetched(filterData);
 
-          debugPrint('loaded-filters $filterData');
+          // debugPrint('loaded-filters $filterData');
 
-          final options = filterData?.brands?.options?.map((e)=>e?['value']).toList();
+          allTags = filterData?.tags?.options?.map((e) => e?['value'] as String?).toList() ?? [];
 
-          debugPrint('options $options');
+          tags = List.from(allTags??[]);
+
+
+          // debugPrint('options $tags');
 
           Future.delayed(Duration(seconds: 1), () {
-            emit(state.copyWith(filterState: loaded));
+            emit(state.copyWith(filterState: loaded,tags: tags));
           });
       },
     );
+  }
+
+  void searchTag(String? name) {
+    final original = allTags ?? [];
+
+    if (name == null || name.trim().isEmpty) {
+      tags = List.from(original);
+      emit(state.copyWith(tags: tags));
+      return;
+    }
+
+    final query = name.toLowerCase();
+
+    tags = original.where((tag) => tag?.toLowerCase().contains(query) ?? false).toList();
+
+    emit(state.copyWith(tags: tags));
+
   }
 
 }
