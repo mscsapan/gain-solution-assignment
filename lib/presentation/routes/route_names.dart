@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/contact/contact_screen.dart';
 import '../screens/filter/filter_screen.dart';
+import '../screens/profile/profile_screen.dart';
 import '../screens/ticket/ticket_screen.dart';
 import 'route_packages_name.dart';
 
@@ -81,10 +82,11 @@ class RouteNames {
           return MaterialPageRoute(
               settings: settings, builder: (_) => const FilterScreen());
 
-      // case RouteNames.profileScreen:
-      //   return MaterialPageRoute(
-      //       settings: settings, builder: (_) => const ProfileScreen());
-      //
+      case RouteNames.profileScreen:
+        final isFromBottom = settings.arguments as bool;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) =>  ProfileScreen(isFromBottom:isFromBottom));
+
 
       // case RouteNames.updateProfileScreen:
       //   return MaterialPageRoute(
