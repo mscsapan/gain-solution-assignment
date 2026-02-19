@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gain_solution_task/presentation/widgets/custom_dropdown_button.dart';
 import '../../../core/services/navigation_service.dart';
 import '../../../data/models/filter/filter_item_model.dart';
 import '../../../data/models/filter/filter_model.dart';
 import '../../cubit/filter/filter_cubit.dart';
 import '../../utils/constraints.dart';
 import '../../utils/utils.dart';
+import '../../widgets/custom_dropdown_button.dart';
 import '../../widgets/custom_text.dart';
 import '../../widgets/fetch_error_text.dart';
 import '../../widgets/loading_widget.dart';
@@ -112,6 +112,14 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
   late FilterItemModel ? filters;
   String ? _priority;
 
+  late double startPrice;
+  late double endPrice;
+
+  late RangeValues priceRangeValue;
+  late RangeLabels labels;
+
+  late double initialPrice;
+
   @override
   void initState() {
     super.initState();
@@ -121,12 +129,30 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
   void _initState() {
     filterCubit = context.read<FilterCubit>();
     filters = widget.filters;
+
+
+    if(filters?.prices != null){
+      startPrice = filters?.prices?.minPrice ?? 0.0;
+      endPrice = filters?.prices?.maxPrice ?? 0.0;
+    }else{
+      startPrice = 0.0;
+      endPrice =  0.0;
+    }
+
+    initialPrice = endPrice;
+
+    priceRangeValue = RangeValues(0, endPrice);
+    labels = RangeLabels(startPrice.round().toString(), endPrice.round().toString());
+
+    filterCubit.addFilterInfo((item)=>item.copyWith(minPrice: startPrice,maxPrice: endPrice));
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: Utils.symmetric(),
+      padding: Utils.symmetric().copyWith(bottom: Utils.mediaQuery(context).height * 0.05),
       children: [
         _titleText(filters?.brands?.label),
         ...List.generate(filters?.brands?.options?.length??0, (index){
@@ -170,6 +196,7 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
             ,
           );
         }),
+        Utils.verticalSpace(16.0),
         _titleText(filters?.priority?.label),
         Utils.verticalSpace(8.0),
         CustomDropdownButton<String?>(
@@ -182,6 +209,7 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
           },
           itemBuilder: (item) => CustomText(text: item??'',fontWeight: FontWeight.w500,fontSize: 14.0), // Customize item display
         ),
+        Utils.verticalSpace(16.0),
         _titleText(filters?.tags?.label),
         Utils.verticalSpace(8.0),
 
@@ -228,6 +256,7 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
             ),
           ),
         ),
+        Utils.verticalSpace(16.0),
 
         /*Wrap(
           spacing: 8,
@@ -249,7 +278,35 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
             },
           ),
         ),*/
+        _titleText(filters?.prices?.label),
+        Utils.verticalSpace(8.0),
+        CustomText(
+          text: '${Utils.formatAmount(context, startPrice,1)} - ${Utils.formatAmount(context, endPrice,1)}',
+          fontSize: 14.0,
+          fontWeight: FontWeight.w400,
+          color: blackColor,
+        ),
+        RangeSlider(
+          values: priceRangeValue,
+          min: 0,
+          // max: productCubit.filter?.prices?.isNotEmpty??false?productCubit.filter?.prices?.last??0.0 : 0.0,
+          max: initialPrice,
+          activeColor: primaryColor,
+          inactiveColor: scaffoldBgColor,
+          labels: labels,
+          onChanged: (RangeValues values) {
 
+            priceRangeValue = values;
+
+            startPrice = double.parse(values.start.round().toString());
+
+            endPrice = double.parse(values.end.round().toString());
+
+            filterCubit.addFilterInfo((item)=>item.copyWith(minPrice: startPrice,maxPrice: endPrice));
+          },
+        ),
+
+        Utils.verticalSpace(16.0),
         _titleText(filters?.status?.label),
         Utils.verticalSpace(8.0),
         TextFormField(
@@ -271,16 +328,31 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
           children: List.generate(filterCubit.state.tags?.length??0, (index){
             final tag = filterCubit.state.tags?[index]?? '';
 
-            // children: List.generate(filters?.tags?.options?.length??0, (index){
-            // final tag = filters?.tags?.options?[index]?['value']?? '';
-            return Container(
-              padding: Utils.symmetric(h: 12.0,v: 6.0),
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: Utils.borderRadius(r: 8.0),
-                border: Border.all(color: cardBorderColor),
+            final isSelected = filterCubit.state.filter?.selectedTags?.any((e)=>e == tag) ?? false;
+
+            return InkWell(
+              onTap: (){
+
+                  final brands = List<String>.from(filterCubit.state.filter?.selectedTags ?? const <String>[]);
+
+                  if (brands.contains(tag)) {
+                    brands.remove(tag);
+                  } else {
+                    brands.add(tag);
+                  }
+
+                  filterCubit.addFilterInfo((e) => e.copyWith(selectedTags: brands));
+
+              },
+              child: Container(
+                padding: Utils.symmetric(h: 12.0,v: 6.0),
+                decoration: BoxDecoration(
+                  color: isSelected ? greenColor :whiteColor,
+                  borderRadius: Utils.borderRadius(r: 8.0),
+                  border: Border.all(color: isSelected ?transparent:cardBorderColor),
+                ),
+                child:CustomText(text: Utils.capitalizeFirstLetter(tag),color: isSelected?whiteColor :textRegular,fontSize: 12.0,fontWeight: FontWeight.w500,),
               ),
-              child:CustomText(text: Utils.capitalizeFirstLetter(tag),color: textRegular,fontSize: 12.0,fontWeight: FontWeight.w500,),
             );
           }),
         ),

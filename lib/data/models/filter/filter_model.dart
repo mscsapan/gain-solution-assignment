@@ -13,6 +13,7 @@ class FilterModel extends Equatable {
 
   final List<String?> ? brands;
   final List<String?> ? tags;
+  final List<String?> ? selectedTags;
   final String priority;
   final String status;
   final double minPrice;
@@ -28,6 +29,7 @@ class FilterModel extends Equatable {
     this.label = '',
     this.brands = const [],
     this.tags = const [],
+    this.selectedTags = const [],
     this.priority = '',
     this.status = '',
     this.minPrice = 0.0,
@@ -45,6 +47,7 @@ class FilterModel extends Equatable {
 
     List<String?> ? brands,
     List<String?> ? tags,
+    List<String?> ? selectedTags,
     String? priority,
     String? status,
     double? minPrice,
@@ -59,6 +62,7 @@ class FilterModel extends Equatable {
       options: options ?? this.options,
       brands: brands ?? this.brands,
       tags: tags ?? this.tags,
+      selectedTags: selectedTags ?? this.selectedTags,
       priority: priority ?? this.priority,
       status: status ?? this.status,
       minPrice: minPrice ?? this.minPrice,
@@ -111,6 +115,7 @@ class FilterModel extends Equatable {
     filterState,
     brands,
     tags,
+    selectedTags,
     priority,
     status,
     minPrice,

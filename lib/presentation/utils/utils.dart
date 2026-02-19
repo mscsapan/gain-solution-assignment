@@ -129,30 +129,33 @@ class Utils {
     }
   }*/
 
-  static String formatAmount(BuildContext context, var price, [int radix = 1]) {
+  static String formatAmount(BuildContext context, var price, [int radix = 2]) {
+    final icon = '\$ ';
     // final sCubit = context.read<SettingCubit>();
     // if (cCubit.state.currencies.isNotEmpty) {
     //   return Utils.convertCurrency(price, context, cCubit.state.currencies.first, radix);
     // } else {
     if (price is double) {
-      return price.toStringAsFixed(radix);
+      // return price.toStringAsFixed(radix);
       // final result = price * c.currencyRate;
-      // return '${c.currencyIcon}${result.toStringAsFixed(radix)}';
+      return '$icon${price.toStringAsFixed(radix)}';
     }
     if (price is String) {
       final r = double.tryParse(price) ?? 0.0;
       // final p = r * c.currencyRate;
       // return '${c.currencyIcon}${p.toStringAsFixed(radix)}';
+      return '$icon${r.toStringAsFixed(radix)}';
 
-      return r.toStringAsFixed(radix);
+      //return r.toStringAsFixed(radix);
     }
     if (price is int) {
       // debugPrint('int-price $price');
       // final p = price * c.currencyRate;
       // return '${c.currencyIcon}${p.toStringAsFixed(radix)}';
-      return price.toStringAsFixed(radix);
+      // return price.toStringAsFixed(radix);
+      return '$icon${price.toStringAsFixed(radix)}';
     }
-    return price.toStringAsFixed(radix);
+    return '$icon${price.toStringAsFixed(radix)}';
   }
 
   static String imageContent(BuildContext context, String key) {
