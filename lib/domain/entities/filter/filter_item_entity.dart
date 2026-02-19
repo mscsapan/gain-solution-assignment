@@ -10,12 +10,14 @@ class FilterItemEntity extends Equatable {
   final FilterEntity ? priority;
   final FilterEntity ? status;
   final FilterEntity ? tags;
+  final FilterEntity ? prices;
 
   const FilterItemEntity({
     required this.brands,
     required this.priority,
     required this.status,
     required this.tags,
+    required this.prices,
   });
 
   FilterItemEntity copyWith({
@@ -23,17 +25,19 @@ class FilterItemEntity extends Equatable {
     FilterEntity ? priority,
     FilterEntity ? status,
     FilterEntity ? tags,
+    FilterEntity ? prices,
   }) {
     return FilterItemEntity(
       brands: brands ?? this.brands,
       priority: priority ?? this.priority,
       status: status ?? this.status,
       tags: tags ?? this.tags,
+      prices: prices ?? this.prices,
     );
   }
 
   @override
-  List<Object?> get props => [brands, priority, status, tags];
+  List<Object?> get props => [brands, priority, status, tags,prices];
 
   @override
   String toString() {

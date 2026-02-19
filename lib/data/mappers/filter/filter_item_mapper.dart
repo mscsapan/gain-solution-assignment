@@ -11,6 +11,7 @@ extension FilterItemModelMapper on FilterItemModel {
       priority: priority?.toDomain(),
       status: status?.toDomain(),
       tags: tags?.toDomain(),
+      prices: prices?.toDomain(),
     );
   }
 }
@@ -23,6 +24,7 @@ extension FilterItemEntityMapper on FilterItemEntity {
       priority: priority?.toData(),
       status: status?.toData(),
       tags: tags?.toData(),
+      prices: prices?.toData(),
     );
   }
 }

@@ -82,6 +82,8 @@ class FilterModel extends Equatable {
       id: map['id'] ?? 0,
       type: map['type'] ?? '',
       label: map['label'] ?? '',
+      minPrice: map['min_price'] != null? double.parse(map['min_price'].toString()):0.0,
+      maxPrice: map['max_price'] != null? double.parse(map['max_price'].toString()):0.0,
       options: map['options'] != null
           ? List<Map<String, dynamic>?>.from(
               (map['options'] as List<dynamic>).map<Map<String, dynamic>?>(

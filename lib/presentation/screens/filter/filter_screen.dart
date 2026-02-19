@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/widgets/custom_dropdown_button.dart';
 import '../../../core/services/navigation_service.dart';
 import '../../../data/models/filter/filter_item_model.dart';
 import '../../../data/models/filter/filter_model.dart';
@@ -96,15 +97,34 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 }
 
-class LoadedFilterData extends StatelessWidget {
+class LoadedFilterData extends StatefulWidget {
   const LoadedFilterData({super.key, required this.filters});
   final FilterItemModel ? filters;
 
+  @override
+  State<LoadedFilterData> createState() => _LoadedFilterDataState();
+}
 
+class _LoadedFilterDataState extends State<LoadedFilterData> {
+
+
+  late FilterCubit filterCubit;
+  late FilterItemModel ? filters;
+  String ? _priority;
+
+  @override
+  void initState() {
+    super.initState();
+    _initState();
+  }
+
+  void _initState() {
+    filterCubit = context.read<FilterCubit>();
+    filters = widget.filters;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final filterCubit = context.read<FilterCubit>();
     return ListView(
       padding: Utils.symmetric(),
       children: [
@@ -150,7 +170,87 @@ class LoadedFilterData extends StatelessWidget {
             ,
           );
         }),
+        _titleText(filters?.priority?.label),
+        Utils.verticalSpace(8.0),
+        CustomDropdownButton<String?>(
+          value: _priority,
+          hintText: "Select priority",
+          items:  filters?.priority?.options
+              ?.map((e) => e?['value']?.toString() ?? '')
+              .toList() ??[],
+          onChanged: (value) {
+          },
+          itemBuilder: (item) => CustomText(text: item??'',fontWeight: FontWeight.w500,fontSize: 14.0), // Customize item display
+        ),
         _titleText(filters?.tags?.label),
+        Utils.verticalSpace(8.0),
+
+        RadioGroup<String>(
+          groupValue: filterCubit.state.filter?.status,
+          onChanged: (value) {
+            if (value != null) {
+              filterCubit.addFilterInfo((e) => e.copyWith(status: value));
+            }
+          },
+          child: Wrap(
+            spacing: 10.0,
+            alignment: WrapAlignment.spaceEvenly,
+            children: List.generate(
+              filters?.status?.options?.length ?? 0,
+                  (index) {
+                final item = filters?.status?.options?[index]?['value']?.toString() ?? '';
+
+                return GestureDetector(
+                  onTap: () {
+                    filterCubit.addFilterInfo((e) => e.copyWith(status: item));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Transform.scale(
+                        scale: 1.0,
+                        child: Radio<String>(value: item,activeColor: greenColor,visualDensity: const VisualDensity(
+                          horizontal: -2.0,
+                          vertical: -2.0,
+                        ),),
+                      ),
+                      CustomText(
+                        text: item,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: textBorderRegular,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+
+        /*Wrap(
+          spacing: 8,
+          children: List.generate(
+            filters?.status?.options?.length ?? 0,
+                (index) {
+              final item =
+                  filters?.status?.options?[index]?['value']?.toString() ?? '';
+
+              final selected = filterCubit.state.filter?.status == item;
+
+              return ChoiceChip(
+                label: Text(item),
+                selected: selected,
+                onSelected: (_) {
+                  filterCubit.addFilterInfo((e) => e.copyWith(status: item));
+                },
+              );
+            },
+          ),
+        ),*/
+
+        _titleText(filters?.status?.label),
         Utils.verticalSpace(8.0),
         TextFormField(
           onChanged: (val) => filterCubit.searchTag(val),
@@ -184,29 +284,7 @@ class LoadedFilterData extends StatelessWidget {
             );
           }),
         ),
-        // BlocBuilder<FilterCubit, FilterModel>(
-        //   builder: (context, state) {
-        //     return Wrap(
-        //       runSpacing: 10.0,
-        //       spacing: 10.0,
-        //       children: List.generate(filterCubit.state.tags?.length??0, (index){
-        //         final tag = filterCubit.state.tags?[index]?? '';
-        //
-        //         // children: List.generate(filters?.tags?.options?.length??0, (index){
-        //         // final tag = filters?.tags?.options?[index]?['value']?? '';
-        //         return Container(
-        //           padding: Utils.symmetric(h: 12.0,v: 6.0),
-        //           decoration: BoxDecoration(
-        //             color: whiteColor,
-        //             borderRadius: Utils.borderRadius(r: 8.0),
-        //             border: Border.all(color: cardBorderColor),
-        //           ),
-        //           child:CustomText(text: Utils.capitalizeFirstLetter(tag),color: textRegular,fontSize: 12.0,fontWeight: FontWeight.w500,),
-        //         );
-        //       }),
-        //     );
-        //   },
-        // ),
+
       ],
     );
   }

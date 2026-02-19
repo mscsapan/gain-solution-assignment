@@ -9,11 +9,13 @@ class FilterItemModel extends Equatable {
   final FilterModel ? priority;
   final FilterModel ? status;
   final FilterModel ? tags;
+  final FilterModel ? prices;
   const FilterItemModel({
     this.brands,
     this.priority,
     this.status,
     this.tags,
+    this.prices,
   });
 
   FilterItemModel copyWith({
@@ -21,12 +23,14 @@ class FilterItemModel extends Equatable {
     FilterModel ? priority,
     FilterModel ? status,
     FilterModel ? tags,
+    FilterModel ? prices,
   }) {
     return FilterItemModel(
       brands: brands ?? this.brands,
       priority: priority ?? this.priority,
       status: status ?? this.status,
       tags: tags ?? this.tags,
+      prices: prices ?? this.prices,
     );
   }
 
@@ -45,6 +49,7 @@ class FilterItemModel extends Equatable {
       priority: map['priority'] != null ? FilterModel .fromMap(map['priority'] as Map<String,dynamic>) : null,
       status: map['status'] != null ? FilterModel .fromMap(map['status'] as Map<String,dynamic>) : null,
       tags: map['tags'] != null ? FilterModel .fromMap(map['tags'] as Map<String,dynamic>) : null,
+      prices: map['prices'] != null ? FilterModel .fromMap(map['prices'] as Map<String,dynamic>) : null,
     );
   }
 
@@ -56,5 +61,5 @@ class FilterItemModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [brands, priority, status, tags];
+  List<Object?> get props => [brands, priority, status, tags,prices];
 }

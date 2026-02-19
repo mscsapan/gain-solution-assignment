@@ -42,5 +42,13 @@
       { "value": "security" },
       { "value": "integration" }
     ]
+  },
+  "price":  {
+    "id": "price",
+    "type": "average_price",
+    "label": "Average Price",
+    "min_price": 10,
+    "max_price": 900
+
   }
 }

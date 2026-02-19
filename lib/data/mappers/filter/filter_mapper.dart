@@ -10,6 +10,8 @@ extension FilterModelMapper on FilterModel {
       type: type,
       label: label,
       options: options,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
     );
   }
 }
@@ -22,6 +24,8 @@ extension FilterEntityMapper on FilterEntity {
       type: type,
       label: label,
       options: options,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
     );
   }
 }
