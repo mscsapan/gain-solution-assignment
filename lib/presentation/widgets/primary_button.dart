@@ -8,7 +8,7 @@ import 'custom_text.dart';
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
-    this.maximumSize = const Size(double.infinity, 52.0),
+    this.maximumSize = const Size(double.infinity, 40.0),
     required this.text,
     this.fontSize = 16.0,
     this.fontWeight = FontWeight.w400,
@@ -16,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
     this.textColor = whiteColor,
     this.bgColor = primaryColor,
     this.borderColor = primaryColor,
-    this.minimumSize = const Size(double.infinity, 52.0),
+    this.minimumSize = const Size(double.infinity, 40.0),
     this.borderRadiusSize = 6.0,
     this.buttonType = ButtonType.elevated,
     this.padding,
@@ -50,25 +50,15 @@ class PrimaryButton extends StatelessWidget {
         padding: p,
         child: ElevatedButton.icon(
           onPressed: onPressed,
-          label: tempIcon,
-          icon: Padding(
-            padding: p,
-            child: CustomText(
-              text: text,
-              color: textColor,
-              fontSize: fontSize.sp,
-              height: 1.5.h,
-              fontWeight: fontWeight,
-              textAlign: TextAlign.center,
-            ),
+          icon: tempIcon,
+          label: CustomText(
+            text: text,
+            color: textColor,
+            fontSize: fontSize.sp,
+            height: 1.5.h,
+            fontWeight: fontWeight,
+            textAlign: TextAlign.center,
           ),
-        ),
-      );
-    } else if (buttonType == ButtonType.outlined) {
-      return Padding(
-        padding: p,
-        child: OutlinedButton(
-          onPressed: onPressed,
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all(bgColor),
             splashFactory: NoSplash.splashFactory,
@@ -81,16 +71,32 @@ class PrimaryButton extends StatelessWidget {
             minimumSize: WidgetStateProperty.all(minimumSize),
             maximumSize: WidgetStateProperty.all(maximumSize),
           ),
-          child: Padding(
-            padding: Utils.only(bottom: 0.0),
-            child: CustomText(
-              text: text,
-              color: textColor,
-              fontSize: fontSize.sp,
-              height: 1.5.h,
-              fontWeight: fontWeight,
-              textAlign: TextAlign.center,
-            ),
+        ),
+      );
+    } else if (buttonType == ButtonType.outlined) {
+      return OutlinedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(bgColor),
+          splashFactory: NoSplash.splashFactory,
+          shadowColor: WidgetStateProperty.all(transparent),
+          overlayColor: WidgetStateProperty.all(transparent),
+          elevation: WidgetStateProperty.all(0.0),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              borderRadius: borderRadius,
+              side: BorderSide(color: borderColor))),
+          minimumSize: WidgetStateProperty.all(minimumSize),
+          maximumSize: WidgetStateProperty.all(maximumSize),
+        ),
+        child: Padding(
+          padding: Utils.only(bottom: 0.0),
+          child: CustomText(
+            text: text,
+            color: textColor,
+            fontSize: fontSize.sp,
+            height: 1.5.h,
+            fontWeight: fontWeight,
+            textAlign: TextAlign.center,
           ),
         ),
       );
@@ -109,16 +115,13 @@ class PrimaryButton extends StatelessWidget {
             minimumSize: WidgetStateProperty.all(minimumSize),
             maximumSize: WidgetStateProperty.all(maximumSize),
           ),
-          child: Padding(
-            padding: p,
-            child: CustomText(
-              text: text,
-              color: textColor,
-              fontSize: fontSize,
-              height: 1.5,
-              fontWeight: fontWeight,
-              textAlign: TextAlign.center,
-            ),
+          child: CustomText(
+            text: text,
+            color: textColor,
+            fontSize: fontSize,
+            height: 1.5,
+            fontWeight: fontWeight,
+            textAlign: TextAlign.center,
           ),
         ),
       );

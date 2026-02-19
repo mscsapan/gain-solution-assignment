@@ -83,9 +83,9 @@ class RouteNames {
               settings: settings, builder: (_) => const FilterScreen());
 
       case RouteNames.profileScreen:
-        final isFromBottom = settings.arguments as bool;
+        // final isFromBottom = settings.arguments as bool;
         return MaterialPageRoute(
-            settings: settings, builder: (_) =>  ProfileScreen(isFromBottom:isFromBottom));
+            settings: settings, builder: (_) =>  const ProfileScreen());
 
 
       // case RouteNames.updateProfileScreen:

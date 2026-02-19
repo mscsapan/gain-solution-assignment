@@ -17,7 +17,7 @@ class ContactComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final image = 'https://randomuser.me/api/portraits/${contactItem?.gender == 'Male'? 'male':'women'}/$index.jpg';
     return InkWell(
-      onTap: ()=>NavigationService.navigateTo(RouteNames.profileScreen,arguments: false),
+      // onTap: ()=>NavigationService.navigateTo(RouteNames.profileScreen,arguments: false),
       child:  Container(
         padding: Utils.all(value: 12.0),
         margin: Utils.symmetric(h: 0.0,v: 0.0).copyWith(bottom: 12.0),
@@ -44,7 +44,7 @@ class ContactComponent extends StatelessWidget {
                 PopupMenuButton<String>(
                   onSelected: (value) {
                     if(value == 'edit'){
-                      NavigationService.navigateTo(RouteNames.profileScreen,arguments: false);
+                      // NavigationService.navigateTo(RouteNames.profileScreen,arguments: false);
                     }
                   },
                   color: whiteColor,

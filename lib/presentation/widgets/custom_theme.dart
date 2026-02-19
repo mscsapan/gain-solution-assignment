@@ -35,7 +35,7 @@ class MyTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 64),
+          minimumSize: const Size(double.infinity, 40.0),
           backgroundColor: whiteColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
