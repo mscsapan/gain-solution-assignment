@@ -70,10 +70,7 @@ class _FilterScreenState extends State<FilterScreen> {
       ),
 
       body: PageRefresh(
-        onRefresh: () async {
-          // contactCubit.searchContacts?.clear();
-          await filterCubit.getFilterData();
-        },
+        onRefresh: () async =>filterCubit..randomFilter()..getFilterData(),
         child: BlocBuilder<FilterCubit, FilterModel>(
             builder: (context, service) {
               final state = service.filterState;

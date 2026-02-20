@@ -2,7 +2,6 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/mappers/filter/filter_item_mapper.dart';
@@ -103,9 +102,14 @@ class FilterCubit extends Cubit<FilterModel> {
 
     final random = Random();
 
-    final randomItem = baseList[random.nextInt(baseList.length)];
+    // random count: 1 or 2
+    final count = random.nextInt(baseList.length) + 1;
 
-    emit(state.copyWith(randomizedTexts: [randomItem]));
+    final shuffled = List<String>.from(baseList)..shuffle();
+
+    final randomizedTexts = shuffled.take(count).toList();
+
+    emit(state.copyWith(randomizedTexts: randomizedTexts));
   }
 
 }
