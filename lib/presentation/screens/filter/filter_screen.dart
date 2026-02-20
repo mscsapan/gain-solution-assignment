@@ -201,7 +201,7 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
         Utils.verticalSpace(8.0),
         CustomDropdownButton<String?>(
           value: _priority,
-          hintText: "Select priority",
+          hintText: "priority",
           items:  filters?.priority?.options
               ?.map((e) => e?['value']?.toString() ?? '')
               .toList() ??[],

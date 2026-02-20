@@ -14,11 +14,13 @@ class TicketCubit extends Cubit<TicketItemModel> {
 
   TicketCubit({required TicketUseCases useCase})
       : _useCase = useCase,
-        super(TicketItemModel.init());
+        super(TicketItemModel.init()){
+    getTickets();
+  }
 
   List<TicketItemModel?> ? tickets = [];
 
-  Future<void> getPointHistory() async {
+  Future<void> getTickets() async {
 
     emit(state.copyWith(ticketState: TicketFetching()));
 

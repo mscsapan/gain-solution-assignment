@@ -34,7 +34,7 @@ class _TicketScreenState extends State<TicketScreen> {
   void _initState() {
     pointCubit = context.read<TicketCubit>();
 
-    Future.microtask(()=>pointCubit.getPointHistory());
+    //Future.microtask(()=>pointCubit.getPointHistory());
 
   }
 
@@ -44,7 +44,7 @@ class _TicketScreenState extends State<TicketScreen> {
     return Scaffold(
       appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
       body: PageRefresh(
-        onRefresh: () async => await pointCubit.getPointHistory(),
+        onRefresh: () async => await pointCubit.getTickets(),
         child: BlocBuilder<TicketCubit, TicketItemModel>(
             builder: (context, service) {
               final state = service.ticketState;

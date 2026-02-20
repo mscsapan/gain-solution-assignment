@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
 
 import '../../../../core/services/navigation_service.dart';
 import '../../../routes/route_names.dart';
+import '../../../widgets/custom_image.dart';
 import '/presentation/utils/constraints.dart';
 import '/presentation/utils/utils.dart';
 import '../../../../data/models/contact/contact_item_model.dart';
@@ -68,24 +72,25 @@ class ContactComponent extends StatelessWidget {
               ],
             ),
             Utils.verticalSpace(12.0),
-            _basicInfo(Icons.email_outlined,contactItem?.email),
-            _basicInfo(Icons.call_outlined,contactItem?.phone),
-            _basicInfo(Icons.location_on_outlined,contactItem?.address),
-            // CustomText(text: '${contactItem?.email}',fontWeight: FontWeight.w500,color: textRegular,letterSpacing: 0.25,),
-            // CustomText(text: '${contactItem?.phone}',fontWeight: FontWeight.w500,color: textRegular,letterSpacing: 0.25,),
-            // CustomText(text: '${contactItem?.address}',fontWeight: FontWeight.w500,color: textRegular,letterSpacing: 0.25,),
+            // _basicInfo(Icons.email_outlined,contactItem?.email),
+            // _basicInfo(Icons.call_outlined,contactItem?.phone),
+            // _basicInfo(Icons.location_on_outlined,contactItem?.address),
+            _basicInfo(KImages.emailIcon,contactItem?.email),
+            _basicInfo(KImages.callIcon,contactItem?.phone),
+            _basicInfo(KImages.locationIcon,contactItem?.address),
           ],
         ),
       ),
     );
   }
-  Widget _basicInfo(IconData icon,String?value){
+  Widget _basicInfo(String icon,String?value){
     return Padding(
-      padding: Utils.only(bottom: 4.0),
+      padding: Utils.only(bottom: 6.0),
       child: Row(
         spacing: 4.0,
         children: [
-          Icon(icon,color: blackColor,size: 20.0,),
+          // Icon(icon,color: blackColor,size: 20.0,),
+          CustomImage(path: icon,height: 18.0,width: 18.0,),
           CustomText(text: value??'',fontWeight: FontWeight.w500,color: textRegular,letterSpacing: 0.25,),
         ],
       ),
