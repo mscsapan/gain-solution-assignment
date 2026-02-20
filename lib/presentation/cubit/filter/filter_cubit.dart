@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,6 +78,34 @@ class FilterCubit extends Cubit<FilterModel> {
 
     emit(state.copyWith(tags: tags));
 
+  }
+
+  // void randomFilter() {
+  //   final baseList = ['Priority','Status', 'Price'];
+  //
+  //   final random = Random();
+  //
+  //   // copy + shuffle
+  //   final shuffled = List<String>.from(baseList)..shuffle();
+  //
+  //   // random length between 1 and full length
+  //   final length = random.nextInt(baseList.length - 1) + 1;
+  //
+  //   final randomizedTexts = shuffled.take(length).toList();
+  //
+  //   emit(state.copyWith(randomizedTexts: randomizedTexts));
+  //
+  //   //debugPrint('randomFilter $randomizedTexts - ${state.randomizedTexts}');
+  // }
+
+  void randomFilter() {
+    final baseList = ['Status', 'Price'];
+
+    final random = Random();
+
+    final randomItem = baseList[random.nextInt(baseList.length)];
+
+    emit(state.copyWith(randomizedTexts: [randomItem]));
   }
 
 }

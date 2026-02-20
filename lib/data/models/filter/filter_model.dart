@@ -21,6 +21,8 @@ class FilterModel extends Equatable {
 
   final FilterModel ? filter;
 
+  final List<String> randomizedTexts;
+
   final FilterState filterState;
 
   const FilterModel({
@@ -29,6 +31,7 @@ class FilterModel extends Equatable {
     this.label = '',
     this.brands = const [],
     this.tags = const [],
+    this.randomizedTexts = const [],
     this.selectedTags = const [],
     this.priority = '',
     this.status = '',
@@ -53,6 +56,7 @@ class FilterModel extends Equatable {
     double? minPrice,
     double? maxPrice,
     FilterModel ? filter,
+    List<String>? randomizedTexts,
     FilterState? filterState,
   }) {
     return FilterModel(
@@ -68,6 +72,7 @@ class FilterModel extends Equatable {
       minPrice: minPrice ?? this.minPrice,
       maxPrice: maxPrice ?? this.maxPrice,
       filter: filter ?? this.filter,
+      randomizedTexts: randomizedTexts ?? this.randomizedTexts,
       filterState: filterState ?? this.filterState,
     );
   }
@@ -120,6 +125,7 @@ class FilterModel extends Equatable {
     status,
     minPrice,
     maxPrice,
+    randomizedTexts,
     filter,
   ];
 }

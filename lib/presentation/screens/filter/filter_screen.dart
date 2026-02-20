@@ -36,7 +36,7 @@ class _FilterScreenState extends State<FilterScreen> {
   void _initState() {
     filterCubit = context.read<FilterCubit>();
 
-    Future.microtask(()=>filterCubit.getFilterData());
+    Future.microtask(()=>filterCubit..randomFilter()..getFilterData());
 
   }
   
@@ -211,66 +211,73 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
           );
         }),
         Utils.verticalSpace(16.0),
-        _titleText(filters?.priority?.label),
-        Utils.verticalSpace(8.0),
-        CustomDropdownButton<String?>(
-          value: _priority,
-          hintText: "priority",
-          items:  filters?.priority?.options
-              ?.map((e) => e?['value']?.toString() ?? '')
-              .toList() ??[],
-          onChanged: (value) {
-          },
-          itemBuilder: (item) => CustomText(text: item??'',fontWeight: FontWeight.w500,fontSize: 14.0), // Customize item display
-        ),
-        Utils.verticalSpace(16.0),
-        _titleText(filters?.status?.label),
-        Utils.verticalSpace(8.0),
 
-        RadioGroup<String>(
-          groupValue: filterCubit.state.filter?.status,
-          onChanged: (value) {
-            if (value != null) {
-              filterCubit.addFilterInfo((e) => e.copyWith(status: value));
-            }
-          },
-          child: Wrap(
-            spacing: 10.0,
-            alignment: WrapAlignment.spaceEvenly,
-            children: List.generate(
-              filters?.status?.options?.length ?? 0,
-                  (index) {
-                final item = filters?.status?.options?[index]?['value']?.toString() ?? '';
+          _titleText(filters?.priority?.label),
+          Utils.verticalSpace(8.0),
+          CustomDropdownButton<String?>(
+            value: _priority,
+            hintText: "priority",
+            items:  filters?.priority?.options
+                ?.map((e) => e?['value']?.toString() ?? '')
+                .toList() ??[],
+            onChanged: (value) {
+            },
+            itemBuilder: (item) => CustomText(text: item??'',fontWeight: FontWeight.w500,fontSize: 14.0), // Customize item display
+          ),
+          Utils.verticalSpace(16.0),
 
-                return GestureDetector(
-                  onTap: () {
-                    filterCubit.addFilterInfo((e) => e.copyWith(status: item));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Transform.scale(
-                        scale: 1.0,
-                        child: Radio<String>(value: item,activeColor: greenColor,visualDensity: const VisualDensity(
-                          horizontal: -2.0,
-                          vertical: -2.0,
-                        ),),
-                      ),
-                      CustomText(
-                        text: item,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        color: textBorderRegular,
-                      ),
-                    ],
-                  ),
-                );
-              },
+
+        if(filterCubit.state.randomizedTexts.contains('Status'))...[
+          _titleText(filters?.status?.label),
+          Utils.verticalSpace(8.0),
+
+          RadioGroup<String>(
+            groupValue: filterCubit.state.filter?.status,
+            onChanged: (value) {
+              if (value != null) {
+                filterCubit.addFilterInfo((e) => e.copyWith(status: value));
+              }
+            },
+            child: Wrap(
+              spacing: 10.0,
+              alignment: WrapAlignment.spaceEvenly,
+              children: List.generate(
+                filters?.status?.options?.length ?? 0,
+                    (index) {
+                  final item = filters?.status?.options?[index]?['value']?.toString() ?? '';
+
+                  return GestureDetector(
+                    onTap: () {
+                      filterCubit.addFilterInfo((e) => e.copyWith(status: item));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Transform.scale(
+                          scale: 1.0,
+                          child: Radio<String>(value: item,activeColor: greenColor,visualDensity: const VisualDensity(
+                            horizontal: -2.0,
+                            vertical: -2.0,
+                          ),),
+                        ),
+                        CustomText(
+                          text: item,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          color: textBorderRegular,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
-        ),
-        Utils.verticalSpace(16.0),
+
+          Utils.verticalSpace(16.0),
+        ],
+
 
         /*Wrap(
           spacing: 8,
@@ -292,35 +299,38 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
             },
           ),
         ),*/
-        _titleText(filters?.prices?.label),
-        Utils.verticalSpace(8.0),
-        CustomText(
-          text: '${Utils.formatAmount(context, startPrice,1)} - ${Utils.formatAmount(context, endPrice,1)}',
-          fontSize: 14.0,
-          fontWeight: FontWeight.w400,
-          color: blackColor,
-        ),
-        RangeSlider(
-          values: priceRangeValue,
-          min: 0,
-          // max: productCubit.filter?.prices?.isNotEmpty??false?productCubit.filter?.prices?.last??0.0 : 0.0,
-          max: initialPrice,
-          activeColor: primaryColor,
-          inactiveColor: scaffoldBgColor,
-          labels: labels,
-          onChanged: (RangeValues values) {
+        if(filterCubit.state.randomizedTexts.contains('Price'))...[
+          _titleText(filters?.prices?.label),
+          Utils.verticalSpace(8.0),
+          CustomText(
+            text: '${Utils.formatAmount(context, startPrice,1)} - ${Utils.formatAmount(context, endPrice,1)}',
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400,
+            color: blackColor,
+          ),
+          RangeSlider(
+            values: priceRangeValue,
+            min: 0,
+            // max: productCubit.filter?.prices?.isNotEmpty??false?productCubit.filter?.prices?.last??0.0 : 0.0,
+            max: initialPrice,
+            activeColor: primaryColor,
+            inactiveColor: scaffoldBgColor,
+            labels: labels,
+            onChanged: (RangeValues values) {
 
-            priceRangeValue = values;
+              priceRangeValue = values;
 
-            startPrice = double.parse(values.start.round().toString());
+              startPrice = double.parse(values.start.round().toString());
 
-            endPrice = double.parse(values.end.round().toString());
+              endPrice = double.parse(values.end.round().toString());
 
-            filterCubit.addFilterInfo((item)=>item.copyWith(minPrice: startPrice,maxPrice: endPrice));
-          },
-        ),
+              filterCubit.addFilterInfo((item)=>item.copyWith(minPrice: startPrice,maxPrice: endPrice));
+            },
+          ),
+          Utils.verticalSpace(16.0),
+        ],
 
-        Utils.verticalSpace(16.0),
+
         _titleText(filters?.tags?.label),
         Utils.verticalSpace(8.0),
         CustomSearchField(  hintText: 'Search tags',onChanged: (val) => filterCubit.searchTag(val)),
