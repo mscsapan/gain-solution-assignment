@@ -5,13 +5,13 @@
 ## 🎬 Project Demo Video
 
 <div align="center">
-  <video src="output/project-video.mov" controls width="100%" style="max-width: 800px; border-radius: 12px;">
+  <video src="[output/project-video.mov](https://drive.google.com/file/d/11nhJCf4GJjmlT98Q26WoT-vHU5EqhsK2/view?usp=sharing)" controls width="100%" style="max-width: 800px; border-radius: 12px;">
     Your browser does not support the video tag.
-    <a href="output/project-video.mov">⬇️ Download the project demo video</a>
+    <a href="https://drive.google.com/file/d/11nhJCf4GJjmlT98Q26WoT-vHU5EqhsK2/view?usp=sharing">⬇️ Download the project demo video</a>
   </video>
 </div>
 
-> 💡 **Can't see the video?** [Click here to download and watch it](output/project-video.mov)
+> 💡 **Can't see the video?** [Click here to download and watch it]([output/project-video.mov](https://drive.google.com/file/d/11nhJCf4GJjmlT98Q26WoT-vHU5EqhsK2/view?usp=sharing))
 
 This project **excellently follows Clean Architecture principles** with **proper BLoC pattern implementation**.
 
