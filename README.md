@@ -11,7 +11,7 @@
   </video>
 </div>
 
-> 💡 **Can't see the video?** [Click here to download and watch it]([output/project-video.mov](https://drive.google.com/file/d/11nhJCf4GJjmlT98Q26WoT-vHU5EqhsK2/view?usp=sharing))
+> 💡 **Can't see the video?** [Click here to download and watch it](https://drive.google.com/file/d/11nhJCf4GJjmlT98Q26WoT-vHU5EqhsK2/view?usp=sharing)
 
 This project **excellently follows Clean Architecture principles** with **proper BLoC pattern implementation**.
 
