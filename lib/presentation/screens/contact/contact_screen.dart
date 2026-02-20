@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../widgets/custom_search_field.dart';
+import '../ticket/ticket_screen.dart';
 import '/presentation/utils/constraints.dart';
 import '/presentation/utils/utils.dart';
 
@@ -40,7 +42,7 @@ class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
+      appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,  actions: [notificationIcon()],),
       body: PageRefresh(
         onRefresh: () async {
           //contactCubit.searchContacts?.clear();
@@ -85,18 +87,8 @@ class LoadedContactView extends StatelessWidget {
       padding: Utils.symmetric(h: 16.0),
       child: Column(
         children: [
-          TextFormField(
-            onChanged: (val) => cCubit.searchContact(val),
-            decoration: InputDecoration(
-                hintText: 'Search contacts',
-                border: inputBorder,
-                enabledBorder: inputBorder,
-                focusedBorder: inputBorder,
-                filled: true,
-                fillColor: grayBackgroundColor,
-                prefixIcon: Icon(Icons.search_outlined, color: blackColor,)
-            ),
-          ),
+
+          CustomSearchField(hintText: 'Search contacts', onChanged: (val) => cCubit.searchContact(val),),
 
           if(cCubit.contacts?.isNotEmpty??false)...[
             Padding(

@@ -54,7 +54,7 @@ class FilterCubit extends Cubit<FilterModel> {
 
           // debugPrint('options $tags');
 
-          Future.delayed(Duration(seconds: 1), () {
+          Future.delayed(Duration(milliseconds: 200), () {
             emit(state.copyWith(filterState: loaded,tags: tags));
           });
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
 import 'package:gain_solution_task/presentation/utils/utils.dart';
 
 import '../../../core/services/navigation_service.dart';
@@ -8,6 +9,7 @@ import '../../cubit/ticket/ticket_cubit.dart';
 import '../../routes/route_names.dart';
 import '../../utils/constraints.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_image.dart';
 import '../../widgets/custom_text.dart';
 import '../../widgets/fetch_error_text.dart';
 import '../../widgets/loading_widget.dart';
@@ -42,7 +44,12 @@ class _TicketScreenState extends State<TicketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Gain Solutions',isShowBackButton: false,isCenterText: false,),
+      appBar: CustomAppBar(
+        title: 'Gain Solutions',
+        isShowBackButton: false,
+        isCenterText: false,
+        actions: [notificationIcon()],
+      ),
       body: PageRefresh(
         onRefresh: () async => await pointCubit.getTickets(),
         child: BlocBuilder<TicketCubit, TicketItemModel>(
@@ -108,5 +115,30 @@ class LoadedTicketView extends StatelessWidget {
       ),
     );
   }
+}
+
+
+Widget notificationIcon(){
+  return Padding(
+    padding: Utils.symmetric(h: 16.0),
+    child: Stack(
+      clipBehavior: Clip.none,
+      children: [
+        CustomImage(path: KImages.notificationIcon),
+        Positioned(
+          top: -8.0,
+          right: -5.0,
+          child: Container(
+            padding: Utils.all(value: 5.0),
+            decoration: BoxDecoration(
+              color: redColor,
+              shape: BoxShape.circle,
+            ),
+            child: CustomText(text: '3',fontWeight: FontWeight.w500,fontSize: 10.0,color: whiteColor,),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 

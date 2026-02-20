@@ -39,27 +39,13 @@ class ContactCubit extends Cubit<ContactItemModel> {
 
         //debugPrint('loaded-Contacts $contacts');
 
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(milliseconds: 200), () {
           emit(state.copyWith(contactState: loaded,contacts: searchContacts));
         });
       },
     );
   }
 
-  // void searchContact(String? name) {
-  //
-  //   if (name == null || name.trim().isEmpty) return;
-  //
-  //   final query = name.toLowerCase();
-  //
-  //   searchContacts = contacts?.where((customer) {
-  //     final fullName = '${customer?.firstName ?? ''} ${customer?.lastName ?? ''}'.toLowerCase();
-  //
-  //     return fullName.contains(query);
-  //   }).toList();
-  //
-  //   emit(state.copyWith(contacts: searchContacts);
-  // }
 
   void searchContact(String? name) {
 

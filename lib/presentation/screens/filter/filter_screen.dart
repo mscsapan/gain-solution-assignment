@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gain_solution_task/presentation/utils/k_images.dart';
+import 'package:gain_solution_task/presentation/widgets/circle_image.dart';
 import '../../../core/services/navigation_service.dart';
 import '../../../data/models/filter/filter_item_model.dart';
 import '../../../data/models/filter/filter_model.dart';
@@ -7,6 +9,8 @@ import '../../cubit/filter/filter_cubit.dart';
 import '../../utils/constraints.dart';
 import '../../utils/utils.dart';
 import '../../widgets/custom_dropdown_button.dart';
+import '../../widgets/custom_image.dart';
+import '../../widgets/custom_search_field.dart';
 import '../../widgets/custom_text.dart';
 import '../../widgets/fetch_error_text.dart';
 import '../../widgets/loading_widget.dart';
@@ -188,7 +192,17 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
                       // ),
                     ),
                   ),
-                  Expanded(child: CustomText(text: item,fontSize: 14.0,fontWeight: FontWeight.w500,color: textBorderRegular)),
+                  Expanded(
+                    child: Row(
+                    spacing: 4.0,
+                    children: [
+                      CircleImage(image: KImages.gainLogo, size: 28.0),
+                      CustomText(text: item,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: textBorderRegular,),
+                    ],
+                  ),),
 
                 ],
               ),
@@ -210,7 +224,7 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
           itemBuilder: (item) => CustomText(text: item??'',fontWeight: FontWeight.w500,fontSize: 14.0), // Customize item display
         ),
         Utils.verticalSpace(16.0),
-        _titleText(filters?.tags?.label),
+        _titleText(filters?.status?.label),
         Utils.verticalSpace(8.0),
 
         RadioGroup<String>(
@@ -307,20 +321,9 @@ class _LoadedFilterDataState extends State<LoadedFilterData> {
         ),
 
         Utils.verticalSpace(16.0),
-        _titleText(filters?.status?.label),
+        _titleText(filters?.tags?.label),
         Utils.verticalSpace(8.0),
-        TextFormField(
-          onChanged: (val) => filterCubit.searchTag(val),
-          decoration: InputDecoration(
-              hintText: 'Search tags',
-              border: inputBorder,
-              enabledBorder: inputBorder,
-              focusedBorder: inputBorder,
-              filled: true,
-              fillColor: grayBackgroundColor,
-              prefixIcon: Icon(Icons.search_outlined, color: blackColor,)
-          ),
-        ),
+        CustomSearchField(  hintText: 'Search tags',onChanged: (val) => filterCubit.searchTag(val)),
         Utils.verticalSpace(12.0),
         Wrap(
           runSpacing: 10.0,

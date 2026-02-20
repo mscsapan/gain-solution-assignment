@@ -36,9 +36,9 @@ class TicketCubit extends Cubit<TicketItemModel> {
 
         final loaded = TicketFetched(tickets);
 
-        debugPrint('loaded-tickets $tickets');
+        // debugPrint('loaded-tickets $tickets');
 
-         Future.delayed(Duration(seconds: 1),(){
+         Future.delayed(Duration(milliseconds: 200), () {
           emit(state.copyWith(ticketState: loaded));
          });
 

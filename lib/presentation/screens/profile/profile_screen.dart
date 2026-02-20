@@ -62,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                 _titleText('Jonaus'),
                 Utils.verticalSpace(8.0),
                 _headingText('Last name'),
-                _titleText('Ali'),
+                _titleText('Kahnwald'),
                 Utils.verticalSpace(8.0),
                 _headingText('Email'),
                 _titleText('user@gmail.com'),
