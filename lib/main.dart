@@ -44,7 +44,7 @@ class TemplateProject extends StatelessWidget {
               navigatorKey: NavigationService.navigatorKey,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RouteNames.generateRoutes,
-              initialRoute: RouteNames.profileScreen,
+              initialRoute: RouteNames.mainScreen,
               theme: MyTheme.theme,
               onUnknownRoute: (RouteSettings settings) {
                 return MaterialPageRoute(

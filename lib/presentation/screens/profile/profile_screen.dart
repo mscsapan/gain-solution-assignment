@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: CustomAppBar(title: 'My Profile',isShowBackButton: false,isCenterText: false,),
 
       body: ListView(
+        padding: Utils.only(bottom: Utils.mediaQuery(context).height * 0.05),
         children: [
           Container(
             padding: Utils.all(value: 16.0),

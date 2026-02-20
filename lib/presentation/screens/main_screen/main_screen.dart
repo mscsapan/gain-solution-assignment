@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../contact/contact_screen.dart';
+import '../profile/profile_screen.dart';
+import '../ticket/ticket_screen.dart';
 import 'component/bottom_navigation_bar.dart';
 import 'component/main_controller.dart';
 
@@ -21,10 +24,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     screenList = [
-      // const DashboardScreen(),
-      // const MyShopScreen(),
-      // const SellerAllOrderScreen(),
-      // const WithdrawScreen(),
+      const TicketScreen(),
+      const ContactScreen(),
+      const ProfileScreen(),
     ];
   }
 

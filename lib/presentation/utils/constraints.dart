@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gain_solution_task/presentation/utils/utils.dart';
 
-const primaryColor = Color(0xFF6610F2);
+const primaryColor = Color(0xFF00A1E0);
 const secondaryColor = Color(0xFFFE9900);
 const blackColor = Color(0xFF3B3B3B);
 const grayColor = Color(0xFF535769);

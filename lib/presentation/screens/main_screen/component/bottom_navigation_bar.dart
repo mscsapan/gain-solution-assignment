@@ -1,8 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import '../../../utils/constraints.dart';
+import '../../../utils/utils.dart';
+import '../../../widgets/custom_text.dart';
 import 'main_controller.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
@@ -11,67 +11,108 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MainController();
+
     return Container(
-      height: Platform.isAndroid ? 80 : 100,
+      padding: Utils.symmetric(h: 16.0, v: 10.0),
       decoration: const BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          )),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        child: StreamBuilder(
-          initialData: 0,
-          stream: controller.naveListener.stream,
-          builder: (_, AsyncSnapshot<int> index) {
-            int selectedIndex = index.data ?? 0;
-            return BottomNavigationBar(
-              showUnselectedLabels: true,
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
-              selectedLabelStyle:
-                  const TextStyle(fontSize: 14, color: blackColor),
-              unselectedLabelStyle:
-                  const TextStyle(fontSize: 14, color: grayColor),
-              items: const <BottomNavigationBarItem>[
-                // BottomNavigationBarItem(
-                //   tooltip: Language.home,
-                //   icon: _navIcon(KImages.home),
-                //   activeIcon: SvgPicture.asset(KImages.homeActive),
-                //   label: Language.home,
-                // ),
-                // BottomNavigationBarItem(
-                //   tooltip: Language.shop,
-                //   icon: _navIcon(KImages.shop),
-                //   activeIcon: SvgPicture.asset(KImages.shopActive),
-                //   label: Language.shop,
-                // ),
-                // BottomNavigationBarItem(
-                //   tooltip: Language.orders,
-                //   icon: _navIcon(KImages.order),
-                //   activeIcon: SvgPicture.asset(KImages.orderActive),
-                //   label: Language.orders,
-                // ),
-                // BottomNavigationBarItem(
-                //   tooltip: Language.wallet,
-                //   activeIcon: SvgPicture.asset(KImages.walletActive),
-                //   icon: _navIcon(KImages.wallet),
-                //   label: Language.wallet,
-                // ),
-              ],
-              // type: BottomNavigationBarType.fixed,
-              currentIndex: selectedIndex,
-              onTap: (int index) {
-                controller.naveListener.sink.add(index);
-              },
-            );
-          },
+        color: whiteColor,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            color: Colors.black12,
+            offset: Offset(0, -2),
+          )
+        ],
+      ),
+      child: StreamBuilder<int>(
+        initialData: 0,
+        stream: controller.naveListener.stream,
+        builder: (context, snapshot) {
+          final index = snapshot.data ?? 0;
+
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _NavItem(
+                label: "Tickets",
+                icon: Icons.confirmation_num_outlined,
+                selectedIcon: Icons.confirmation_num,
+                isSelected: index == 0,
+                onTap: () => controller.naveListener.sink.add(0),
+              ),
+              _NavItem(
+                label: "Contacts",
+                icon: Icons.group_outlined,
+                selectedIcon: Icons.group,
+                isSelected: index == 1,
+                onTap: () => controller.naveListener.sink.add(1),
+              ),
+              _NavItem(
+                label: "Profile",
+                icon: Icons.person_outline,
+                selectedIcon: Icons.person,
+                isSelected: index == 2,
+                onTap: () => controller.naveListener.sink.add(2),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final IconData selectedIcon;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.label,
+    required this.icon,
+    required this.selectedIcon,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        borderRadius: Utils.borderRadius(r: 30.0),
+        onTap: onTap,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              padding: Utils.symmetric(h: 24.0, v: 8.0),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? Color(0xFFE6F6FC)
+                    : transparent,
+                borderRadius: Utils.borderRadius(r: 30.0),
+              ),
+              child: Icon(
+                isSelected ? selectedIcon : icon,
+                color: isSelected ? primaryColor : blackColor,
+                size: 26.0,
+              ),
+            ),
+            Utils.verticalSpace(4.0),
+            CustomText(text:
+              label,
+                fontSize: 11.0,
+                fontWeight: isSelected? FontWeight.w600:FontWeight.w500,
+                color: blackColor,
+
+            ),
+          ],
         ),
       ),
     );
   }
-
-  // Widget _navIcon(String path) => Padding(
-  //     padding: Utils.symmetric(v: 8.0, h: 0.0), child: SvgPicture.asset(path));
 }
