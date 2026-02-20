@@ -4,7 +4,14 @@
 
 ## 🎬 Project Demo Video
 
-[▶️ Watch the video](output/project-video.mov)
+<div align="center">
+  <video src="output/project-video.mov" controls width="100%" style="max-width: 800px; border-radius: 12px;">
+    Your browser does not support the video tag.
+    <a href="output/project-video.mov">⬇️ Download the project demo video</a>
+  </video>
+</div>
+
+> 💡 **Can't see the video?** [Click here to download and watch it](output/project-video.mov)
 
 This project **excellently follows Clean Architecture principles** with **proper BLoC pattern implementation**.
 
