@@ -2,6 +2,10 @@
 
 ## 🎯 **Architecture Assessment: ✅ FULLY COMPLIANT**
 
+## 🎬 Project Demo Video
+
+[▶️ Watch the video](output/project-video.mov)
+
 This project **excellently follows Clean Architecture principles** with **proper BLoC pattern implementation**.
 
 ## 🏗️ Architecture Overview
